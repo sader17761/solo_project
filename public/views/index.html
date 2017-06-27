@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Solo Project</title>
+      <script src="vendors/angular.min.js" charset="utf-8"></script>
+      <script src="vendors/angular-route.min.js" charset="utf-8"></script>
+      <script src="vendors/jquery.min.js" charset="utf-8"></script>
+      <script src="vendors/bootstrap.min.js" charset="utf-8"></script>
+      <script src="scripts/defaultController.js" charset="utf-8"></script>
+      <script src="scripts/services/defaultService.js" charset="utf-8"></script>
+      <link rel="stylesheet" href="vendors/bootstrap.min.css">
+      <link rel="stylesheet" href="styles/main.min.css">
+  </head>
+  <body ng-app="myApp" ng-controller="DefaultController as dc">
+    <!-- start of navbar -->
+    <nav class="navbar-inverse navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+          <a class="navbar-brand" href="#"><span class="firstName">COREY</span><span class="lastName">SADER</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav pull-right">
+            <li><a class="btnColor" href="#!/">Home <span class="sr-only">(current)</span></a></li>
+            <li><a class="btnColor" href="#!/login">Login/Register</a></li>
+          </ul>
+        </div> <!-- end of navbar-collapse -->
+      </div> <!-- end of container -->
+    </nav>
+
+    <!-- partial views go here -->
+    <ng-view></ng-view>
+
+  </body>
+</html>

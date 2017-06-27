@@ -1,0 +1,39 @@
+/*----------- GLOBAL VARIABLES ----------*/
+
+$primary: #00568e;
+
+/*--------- END GLOBAL VARIABLES --------*/
+
+
+
+
+h1 {
+  color: $primary;
+}
+
+
+
+
+
+/*---- register.html partial ----*/
+.registerDiv {
+  margin-top: 80px;
+}
+
+
+/*---- adminDashboad.html partial ----*/
+.adminDashboardDiv {
+  margin-top: 80px;
+}
+
+.listDisplayDiv {
+  margin-top: 20px;
+}
+
+.listItemDivs {
+  margin-bottom: 15px;
+}
+
+.listItem {
+  margin-left: 20px;
+}

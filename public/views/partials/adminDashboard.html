@@ -1,0 +1,29 @@
+<div class="adminDashboardDiv">
+  <h2>Admin. Dashboard</h2>
+
+  <!-- add collection -->
+  <form name="addCollectionForm">
+        <input placeholder="Add collection name..." ng-model="dc.collectionIn" required>
+        <button class="" ng-click="dc.obtainCollection()">Create Collection</button>
+  </form>
+
+  <!-- add word to collection -->
+  <form name="addWordForm">
+        <select ng-model="dc.dropdownIn" ng-options="item.collName for item in dc.collectionArray"></select>
+        <input type="text" placeholder="Add word..." ng-model="dc.wordIn" required>
+        <input type="number" placeholder="Add rating (1-5)..." ng-model="dc.ratingIn" required>
+        <button class="" ng-click="dc.obtainWord()">Add Word</button>
+  </form>
+</div>
+
+<div class="collectionNameDiv" ng-init="dc.getCollectionNames()">
+  <div class="" ng-repeat="collection in dc.collectionArray">
+    <h3>{{collection.collName}}</h3>
+  </div>
+</div>
+
+<div class="listDisplayDiv" ng-init="dc.getWordCollection()">
+  <div class="listItemDivs" ng-repeat="words in dc.wordsArray">
+    <p><button ng-click="dc.removeWord(words._id)">Delete</button><button>Edit</button><span class="listItem">{{words.word}}</span></p>
+  </div>
+</div>
