@@ -23,6 +23,17 @@ myApp.controller('DefaultController', DefaultController);
 function DefaultController(DefaultService, $location) {
     var vm = this;
 
+    /*---- DISPLAY ----*/
+    vm.collectionDisplay = true;
+
+    vm.toggleShow = function(){
+      if(vm.collectionDisplay === false){
+        vm.collectionDisplay = true;
+      } else {
+        vm.collectionDisplay = false;
+      }
+    };
+
     /*---- COLLECTION NAME ----*/
     vm.obtainCollection = function() {
       console.log('In controller, sending collection.');
@@ -52,7 +63,7 @@ function DefaultController(DefaultService, $location) {
       var todaysDate = new Date();
       // create object to send to database
       var wordObject = {
-        //collName: vm.collectionIn,
+        collName: vm.dropdownIn.collName,
         word: vm.wordIn,
         rating: vm.ratingIn,
         dateAdded: todaysDate
@@ -75,7 +86,7 @@ function DefaultController(DefaultService, $location) {
     vm.removeWord = function(id) {
       DefaultService.deleteWord(id).then(function(response){
         console.log('Delete response is:', response);
-        vm.getWordCollection1();
+        vm.getWordCollection();
       });
     };
 

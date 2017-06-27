@@ -17,13 +17,10 @@
 </div>
 
 <div class="collectionNameDiv" ng-init="dc.getCollectionNames()">
-  <div class="" ng-repeat="collection in dc.collectionArray">
-    <h3>{{collection.collName}}</h3>
-  </div>
-</div>
-
-<div class="listDisplayDiv" ng-init="dc.getWordCollection()">
-  <div class="listItemDivs" ng-repeat="words in dc.wordsArray">
-    <p><button ng-click="dc.removeWord(words._id)">Delete</button><button>Edit</button><span class="listItem">{{words.word}}</span></p>
+  <div class="" ng-repeat="collection in dc.collectionArray" ng-init="dc.getWordCollection()">
+    <h3 ng-click="dc.toggleShow()">{{collection.collName}}</h3>
+    <div ng-show="dc.collectionDisplay" class="" ng-repeat="words in dc.wordsArray">
+      <p ng-if="words.collName === collection.collName"><button ng-click="dc.removeWord(words._id)">Delete</button><button>Edit</button><span class="listItem">{{words.word}}</span></p>
+    </div>
   </div>
 </div>
