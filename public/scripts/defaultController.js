@@ -26,7 +26,6 @@ function DefaultController(DefaultService, $location) {
 
     /*---- COLLECTION NAME ----*/
     vm.obtainCollection = function() {
-
         //console.log('In controller, sending collection.');
         var todaysDate = new Date();
         // create object to send to database
@@ -58,26 +57,32 @@ function DefaultController(DefaultService, $location) {
 
     vm.removeCollection = function(id) {
       console.log('Inside .removeCollection with collection id: ', id);
-      DefaultService.deleteCollection(id).then(function(response){
-        console.log('Delete collection response is:', response);
-        vm.getCollectionNames();
-      });
+
+      if(confirm('Are you sure you want to delete this collection>')){
+        DefaultService.deleteCollection(id).then(function(response){
+          console.log('Delete collection response is:', response);
+          vm.getCollectionNames();
+        });
+      }
     };
 
 
 
 
     /*---- WORD COLLECTION ----*/
-    vm.obtainWord = function(collName) {
-      //console.log('In controller, sending word.');
+    vm.obtainWord = function(collId, collName) {
+      console.log('Id attached to word is:', collId);
+      console.log('Name attached to word is:', collName);
       var todaysDate = new Date();
       // create object to send to database
       var wordObject = {
-        collName: collName,
+        collectionId: collId,
+        collectionName: collName,
         word: vm.wordIn,
         rating: vm.ratingIn,
         dateAdded: todaysDate
       };
+      console.log('wordObject:', wordObject);
       DefaultService.addWord(wordObject).then(function(response){
         //console.log('Response from Service: ', response);
         vm.getWordCollection(); // this will call the get function and display to DOM

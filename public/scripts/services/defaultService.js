@@ -32,7 +32,7 @@ myApp.service('DefaultService', function($http) {
 
   /*---- WORD COLLECTION ----*/
   sv.addWord = function(wordToAdd) {
-    //console.log("In Service with the word:", wordToAdd);
+    console.log("In Service with the word to add:", wordToAdd);
     return $http.post('/words', wordToAdd).then(function(response){
       //console.log('Back from adding word to DB with: ', response);
       return response;

@@ -11,7 +11,8 @@ mongoose.connect('localhost:27017/soloProject'); // soloProject is the DB name
 
 // schema
 var wordSchema = new mongoose.Schema({
-    collName: String,
+    collectionId: String,
+    collectionName: String,
     word: String,
     rating: Number,
     dateAdded: Date
