@@ -19,7 +19,7 @@ myApp.service('DefaultService', function($http) {
     });
   };
 
-  
+
 
 
   /*---- WORD COLLECTION ----*/

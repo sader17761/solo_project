@@ -39,6 +39,7 @@ function DefaultController(DefaultService, $location) {
       console.log('In controller, sending collection.');
       // create object to send to database
       var collectionObject = {
+        show: false,
         collName: vm.collectionIn,
       };
       DefaultService.addCollection(collectionObject).then(function(response){
@@ -58,12 +59,12 @@ function DefaultController(DefaultService, $location) {
 
 
     /*---- WORD COLLECTION ----*/
-    vm.obtainWord = function() {
+    vm.obtainWord = function(collName) {
       console.log('In controller, sending word.');
       var todaysDate = new Date();
       // create object to send to database
       var wordObject = {
-        collName: vm.dropdownIn.collName,
+        collName: collName,
         word: vm.wordIn,
         rating: vm.ratingIn,
         dateAdded: todaysDate
