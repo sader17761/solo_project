@@ -1,54 +1,48 @@
-<div class="adminDashboardDiv" ng-init="dc.getCollectionNames()">
-  <h2>Admin. Dashboard</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="adminDashboardDiv" ng-init="dc.getCollectionNames()">
+        <h1>Admin. Dashboard</h1>
 
-  <!-- add collection -->
-  <form name="addCollectionForm">
-        <input placeholder="Add collection name..." ng-model="dc.collectionIn" required>
-        <button class="" ng-click="dc.obtainCollection()">Create Collection</button>
-  </form>
+        <!-- add collection -->
+        <form name="addCollectionForm" class="formDiv">
+              <div class="input-group">
+                <input class="form-control input-add" name="tags[]" type="text" placeholder="Add collection name..." ng-model="dc.collectionIn" required/>
+                <div class="input-group-btn">
+                  <button class="btn btn-success btn-add" type="button" data-target="tag-controls" ng-click="dc.obtainCollection()"><span>+</span></button>
+                </div>
+              </div>
+        </form>
 
-  <!-- add word to collection -->
-  <!-- <form name="addWordForm">
-        <select ng-model="dc.dropdownIn" ng-options="item.collName for item in dc.collectionArray"></select>
-        <input type="text" placeholder="Add word..." ng-model="dc.wordIn" required>
-        <input type="number" placeholder="Add rating (1-5)..." ng-model="dc.ratingIn" required>
-        <button class="" ng-click="dc.obtainWord()">Add Word</button>
-  </form>
-</div> -->
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
+            <div class="panel panel-default" ng-repeat="collection in dc.collectionArray">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <span class="deleteBtn pull-right" ng-click="dc.removeCollection(collection._id)">X</span>
+                <h4 class="panel-title">
 
-
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-      <div class="panel panel-default" ng-repeat="collection in dc.collectionArray">
-        <div class="panel-heading" role="tab" id="headingOne">
-          <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href=".{{collection._id}}" aria-expanded="false" aria-controls="{{collection._id}}">
-              {{collection.collName}}
-            </a>
-          </h4>
-        </div>
-        <div class="panel-collapse collapse {{collection._id}}" role="tabpanel" aria-labelledby="headingOne">
-          <div class="panel-body" ng-init="dc.getWordCollection()">
-            <div class="pull-right">
-              <input type="text" placeholder="Add word..." ng-model="dc.wordIn" required>
-              <input type="number" placeholder="Add rating (1-5)..." ng-model="dc.ratingIn" required>
-              <button class="btn btn-success" ng-click="dc.obtainWord(collection.collName)">+</button>
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href=".{{collection._id}}" aria-expanded="false" aria-controls="{{collection._id}}">
+                    {{collection.collName}}
+                  </a>
+                  <span class="createdDate pull-right">Created: {{collection.date | date}}</span>
+                </h4>
+              </div>
+              <div class="panel-collapse collapse {{collection._id}}" role="tabpanel" aria-labelledby="headingOne" ng-init="dc.getWordCollection()">
+                <div class="panel-body">
+                  <div class="">
+                    <input type="text" placeholder="Add word..." ng-model="dc.wordIn" required>
+                    <input type="number" placeholder="Add rating (1-5)..." ng-model="dc.ratingIn" required>
+                    <button class="btn btn-success" ng-click="dc.obtainWord(collection.collName)">+</button>
+                  </div>
+                  <div class="" ng-repeat="words in dc.wordsArray">
+                    <p ng-if="words.collName === collection.collName"><button ng-click="dc.removeWord(words._id)">Delete</button><button>Edit</button><span class="listItem">{{words.word}}</span></p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div ng-show="dc.collectionDisplay" class="" ng-repeat="words in dc.wordsArray">
-              <p ng-if="words.collName === collection.collName"><button ng-click="dc.removeWord(words._id)">Delete</button><button>Edit</button><span class="listItem">{{words.word}}</span></p>
-            </div>
+
           </div>
         </div>
-      </div>
 
-
-
-    </div> <!-- end of panel-group -->
-
-
-<!--
- ng-init="dc.getWordCollection()"
-<div ng-show="dc.collectionDisplay" class="" ng-repeat="words in dc.wordsArray">
-  <p ng-if="words.collName === collection.collName"><button ng-click="dc.removeWord(words._id)">Delete</button><button>Edit</button><span class="listItem">{{words.word}}</span></p>
-</div> -->
+      </div> <!-- end of panel-group -->
+    </div> <!-- end of container -->
