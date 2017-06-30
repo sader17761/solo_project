@@ -15,6 +15,9 @@ myApp.config(function($routeProvider){
   }).when('/adminDashboard', {
       templateUrl: "views/partials/adminDashboard.html",
       controller: "DefaultController"
+  }).when('/studentDashboard', {
+      templateUrl: "views/partials/studentDashboard.html",
+      controller: "DefaultController"
   });
 });
 
@@ -26,6 +29,9 @@ function DefaultController(DefaultService, $location) {
 
     /*---- COLLECTION NAME ----*/
     vm.obtainCollection = function() {
+      if (vm.collectionIn === ''){
+        alert('Please enter a collection name.');
+      } else {
         //console.log('In controller, sending collection.');
         var todaysDate = new Date();
         // create object to send to database
@@ -42,8 +48,8 @@ function DefaultController(DefaultService, $location) {
             vm.collectionIn = '';
             vm.getCollectionNames(); // this will call the get function and display to DOM
           }
-
         });
+      }
     };
 
     vm.getCollectionNames = function(){
@@ -52,16 +58,17 @@ function DefaultController(DefaultService, $location) {
         // clear 'Add word...' input
         vm.collectionIn = '';
         vm.collectionArray = response.data;
+        vm.getWordCollection();
       });
     };
 
     vm.removeCollection = function(id) {
       console.log('Inside .removeCollection with collection id: ', id);
 
-      if(confirm('Are you sure you want to delete this collection>')){
+      if(confirm('Are you sure you want to delete this collection?')){
         DefaultService.deleteCollection(id).then(function(response){
           console.log('Delete collection response is:', response);
-          vm.getCollectionNames();
+          console.log('Length: ', vm.getCollectionNames());
         });
       }
     };
@@ -71,22 +78,26 @@ function DefaultController(DefaultService, $location) {
 
     /*---- WORD COLLECTION ----*/
     vm.obtainWord = function(collId, collName) {
-      console.log('Id attached to word is:', collId);
-      console.log('Name attached to word is:', collName);
-      var todaysDate = new Date();
-      // create object to send to database
-      var wordObject = {
-        collectionId: collId,
-        collectionName: collName,
-        word: vm.wordIn,
-        rating: vm.ratingIn,
-        dateAdded: todaysDate
-      };
-      console.log('wordObject:', wordObject);
-      DefaultService.addWord(wordObject).then(function(response){
-        //console.log('Response from Service: ', response);
-        vm.getWordCollection(); // this will call the get function and display to DOM
-      });
+      if(vm.wordIn === ''){
+        alert('Please enter a word.');
+      } else {
+        //console.log('Id attached to word is:', collId);
+        //console.log('Name attached to word is:', collName);
+        var todaysDate = new Date();
+        // create object to send to database
+        var wordObject = {
+          collectionId: collId,
+          collectionName: collName,
+          word: vm.wordIn,
+          // rating: vm.ratingIn,
+          dateAdded: todaysDate
+        };
+        console.log('wordObject:', wordObject);
+        DefaultService.addWord(wordObject).then(function(response){
+          //console.log('Response from Service: ', response);
+          vm.getWordCollection(); // this will call the get function and display to DOM
+        });
+      }
     };
 
     vm.getWordCollection = function(){
@@ -99,10 +110,17 @@ function DefaultController(DefaultService, $location) {
     };
 
     vm.removeWord = function(id) {
-      DefaultService.deleteWord(id).then(function(response){
-        //console.log('Delete response is:', response);
-        vm.getWordCollection();
-      });
+      if(confirm('Are you sure you want to delete this word?')){
+        DefaultService.deleteWord(id).then(function(response){
+          console.log('Delete word response is:', response);
+          vm.getWordCollection();
+        });
+      }
+    };
+
+    vm.readWord = function(word){
+      console.log('Play button clicked: ', word);
+      responsiveVoice.speak(word, "US English Male", {volume: 1, rate: 0.9});
     };
 
 

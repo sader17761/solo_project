@@ -29,14 +29,34 @@
               </div>
               <div class="panel-collapse collapse {{collection._id}}" role="tabpanel" aria-labelledby="headingOne" ng-init="dc.getWordCollection()">
                 <div class="panel-body">
-                  <div class="">
-                    <input type="text" placeholder="Add word..." ng-model="dc.wordIn" required>
-                    <input type="number" placeholder="Add rating (1-5)..." ng-model="dc.ratingIn" required>
-                    <button class="btn btn-success" ng-click="dc.obtainWord(collection._id, collection.collName)">+</button>
+
+                  <div class="input-group">
+                    <input class="form-control input-add-word" name="tags[]" type="text" placeholder="Add word..." ng-model="dc.wordIn" required/>
+                    <div class="input-group-btn">
+                      <button class="btn btn-success" type="button" data-target="tag-controls" ng-click="dc.obtainWord(collection._id, collection.collName)"><span>+</span></button>
+                    </div>
                   </div>
-                  <div class="" ng-repeat="words in dc.wordsArray">
-                    <p ng-if="words.collectionId === collection._id"><button ng-click="dc.removeWord(words._id)">Delete</button><button>Edit</button><span class="listItem">{{words.word}}</span></p>
-                  </div>
+
+                    <table class="table table-striped wordTable">
+                      <thead>
+                        <tr>
+                          <th class="spellingWordTitle">Spelling Words</th>
+                          <th>Play</th>
+                          <th>Edit</th>
+                          <th>Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="words in dc.wordsArray" ng-if="words.collectionId === collection._id">
+                          <td class="listItem editable" contenteditable="true">{{words.word}}</td>
+                          <td class="play"><i class="fa fa-play play" aria-hidden="true" ng-click="dc.readWord(words.word)"></i></td>
+                          <td class="edit"><i class="fa fa-pencil pencil" aria-hidden="true"></i></td>
+                          <td class="delete"><i class="fa fa-trash trashcan" aria-hidden="true" ng-click="dc.removeWord(words._id)"></i></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  <!-- </div> -->
                 </div>
               </div>
             </div>

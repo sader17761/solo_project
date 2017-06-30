@@ -1,0 +1,12 @@
+<div class="container" ng-init="dc.getCollectionNames()">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="StudentDashboardDiv">
+        <h1>Student Dashboard</h1>
+        <div ng-repeat="collection in dc.collectionArray">
+          <p>{{collection.collName}} ( words)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

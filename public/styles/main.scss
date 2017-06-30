@@ -83,9 +83,60 @@ h1 {
   background-color: rgb(179, 103, 103);
 }
 
+.panel-body {
+  padding: 40px 40px 20px 40px;
+}
+
+.wordTable {
+  margin-top: 20px;
+}
+
+.spellingWordTitle {
+  width: 72%;
+}
+
+.play {
+  width: 10%;
+}
+
+.edit {
+  width: 8%;
+}
+
+.delete {
+  width: 10%;
+}
+
+.play {
+  margin-left: 9px;
+  cursor: pointer;
+  color: #6ca269;
+}
+
+.pencil {
+  margin-left: 9px;
+  cursor: pointer;
+  color: #696fa2;
+}
+
+.trashcan {
+  margin-left: 17px;
+  cursor: pointer;
+  color: #a17c7c;
+}
+
 .createdDate {
   margin-top: 3px;
   font-weight: 400;
   font-size: 12px;
   color: rgb(172, 172, 172);
+}
+
+
+
+
+/*---- StudentDashboad.html partial ----*/
+
+.StudentDashboardDiv {
+  margin-top: 80px;
 }
