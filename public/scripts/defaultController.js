@@ -33,26 +33,43 @@ function DefaultController(DefaultService, $location) {
     vm.quizState = false;
     vm.spellingWordArray = [];
     vm.wordCount = 1;
+    vm.linkEnabled = true;
 
 
     /*---- TAKE QUIZ ----*/
     vm.takeQuiz = function(){
       vm.quizState = true;
+      vm.linkEnabled = !vm.linkEnabled;
     };
 
-    vm.nextWord = function(){
-      console.log('Count: ', vm.wordCount);
-      if(vm.wordCount === vm.spellingWordArray.length){
-        alert('Quiz Complete!');
-      } else {
+    vm.checkSpelling = function(wordToBeChecked){
+      var wordToLowerCase = wordToBeChecked.toLowerCase();
+
+      if(wordToLowerCase === vm.spellingWordArray[vm.wordCount - 1]){
+        alert('Correct!');
+        vm.checkSpellingIn = '';
         vm.wordCount += 1;
+      } else {
+        alert('Incorrect.');
+        vm.checkSpellingIn = '';
+        vm.wordCount += 1;
+      }
+      vm.gameComplete();
+    };
+
+    vm.gameComplete = function(){
+      if(vm.wordCount === vm.spellingWordArray.length + 1){
+        alert('Quiz Complete!');
+        vm.wordCount = vm.spellingWordArray.length;
       }
     };
 
+    // Reads current word
     vm.readSpellingWord = function(){
       responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1], "US English Male", {volume: 1, rate: 0.9});
     };
 
+    // Reads current word definition
     vm.readDef = function(){
       DefaultService.getAudio(vm.spellingWordArray[vm.wordCount - 1]).then(function(){
         //console.log('back with:', DefaultService.wordObjects);
@@ -60,10 +77,12 @@ function DefaultController(DefaultService, $location) {
       });
     };
 
+    // Reads 'part of speech' (noun, verb, adjective, etc...)
     vm.readSpeech = function(){
-      responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1] + ', is a ' + DefaultService.wordObjects[0].speech, "US English Male", {volume: 1, rate: 0.9});
+      DefaultService.getAudio(vm.spellingWordArray[vm.wordCount - 1]).then(function(){
+        responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1] + ', is a ' + DefaultService.wordObjects[0].speech, "US English Male", {volume: 1, rate: 0.9});
+      });
     };
-
 
     // Read word in admin. (text to speech)
     vm.readWord = function(word){

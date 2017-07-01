@@ -195,6 +195,12 @@ h1 {
 
 }
 
+.input-group-addon, .input-group-btn {
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: bottom;
+}
+
 .quizForm {
   margin-top: 80px;
 }
@@ -210,4 +216,10 @@ h1 {
 .quizNextBtn button {
   margin-top: 30px;
   width: 50%;
+}
+
+.inactive {
+  color: #525252;
+  pointer-events: none;
+  cursor: default;
 }
