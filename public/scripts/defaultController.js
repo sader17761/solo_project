@@ -30,15 +30,20 @@ function DefaultController(DefaultService, $location) {
     var vm = this;
 
     /*---- Global Variables ----*/
+    vm.collectionMessage = false;
     vm.quizState = false;
     vm.spellingWordArray = [];
     vm.wordCount = 1;
     vm.linkEnabled = true;
+    vm.numCorrect = 0;
+    vm.numIncorrect = 0;
 
 
     /*---- TAKE QUIZ ----*/
     vm.takeQuiz = function(){
       vm.quizState = true;
+      vm.collectionMessage = false;
+      vm.submitQuiz = false;
       vm.linkEnabled = !vm.linkEnabled;
     };
 
@@ -49,10 +54,12 @@ function DefaultController(DefaultService, $location) {
         alert('Correct!');
         vm.checkSpellingIn = '';
         vm.wordCount += 1;
+        vm.numCorrect += 1;
       } else {
         alert('Incorrect.');
         vm.checkSpellingIn = '';
         vm.wordCount += 1;
+        vm.numIncorrect += 1;
       }
       vm.gameComplete();
     };
@@ -61,6 +68,8 @@ function DefaultController(DefaultService, $location) {
       if(vm.wordCount === vm.spellingWordArray.length + 1){
         alert('Quiz Complete!');
         vm.wordCount = vm.spellingWordArray.length;
+        vm.submitQuiz = true;
+        vm.quizState = false;
       }
     };
 
@@ -194,7 +203,7 @@ function DefaultController(DefaultService, $location) {
         vm.selectedWordsArray = response.data;
         vm.selectedWordCollection = vm.selectedWordsArray[0].collectionName;
         vm.wordArrayLength = vm.selectedWordsArray.length;
-
+        vm.collectionMessage = true;
       });
     };
 

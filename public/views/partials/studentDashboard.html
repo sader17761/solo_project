@@ -17,9 +17,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <div class="answerBox" ng-if="dc.wordArrayLength > 0">
-                            <h3>{{dc.selectedWordCollection}}</h3>
-                            <button class="btn btn-primary" ng-click="dc.takeQuiz()">Start Quiz</button>
+                        <div class="answerBox" ng-if="dc.collectionMessage">
+                            <h3>{{dc.selectedWordCollection}} <button class="btn btn-primary pull-right" ng-click="dc.takeQuiz()">Start Quiz</button></h3>
+
                         </div>
 
                         <!-- start quiz section -->
@@ -38,7 +38,9 @@
                             <button ng-click="dc.readSpeech()" class="btn btn-success">Part of Speech</button>
                             <button ng-click="dc.readDef()" class="btn btn-success">Definition</button>
                         </div>
-                        <div class="submitBtn text-center">
+                        <div class="submitBtn text-center" ng-show="dc.submitQuiz">
+                            <h3>{{dc.selectedWordCollection}} quiz complete.</h3>
+                            <p>You got <span>{{dc.numCorrect}}</span> out of <span>{{dc.numCorrect + dc.numIncorrect}}</span> words correct.</p>
                             <button ng-click="" class="btn btn-success">Submit Quiz</button>
                         </div>
 
