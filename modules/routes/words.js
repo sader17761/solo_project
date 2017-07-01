@@ -39,6 +39,16 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/:id', function(req, res) {
+    console.log('In server looking for words with id:', req.params.id);
+    wordCollection.find({
+      collectionId: req.params.id
+    }).then(function(response){
+        console.log('Collection request:', response);
+        res.send(response);
+    });
+});
+
 router.delete('/:id', function(req, res){
     console.log('Database item deleted:', req.params.id);
     wordCollection.remove({

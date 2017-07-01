@@ -3,6 +3,43 @@
 myApp.service('DefaultService', function($http) {
   var sv = this;
 
+
+  /*---- AUDIO INFORMATION FROM API ----*/
+  sv.getAudio = function(input){
+    console.log('In getAudio with:', input);
+
+    sv.wordObjects = [];
+
+    // var webster = 'http://www.dictionaryapi.com/api/v1/references/sd2/xml/' + input + '?key=c718d2e8-bf66-4605-bfb8-fece23e2a059';
+
+    var wordnik = 'http://api.wordnik.com:80/v4/word.json/' + input + '/definitions?limit=200&includeRelated=true&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5';
+
+    return $http({
+      method: "GET",
+      url: wordnik
+    }).then(function(response) {
+      console.log(response);
+      for (var i = 0; i < response.data.length; i++) {
+        sv.wordObject = {
+          id: i,
+          word: response.data[i].word,
+          speech: response.data[i].partOfSpeech,
+          text: response.data[i].text
+        };
+        sv.wordObjects.push(sv.wordObject);
+      }
+      console.log('Word Objects:', sv.wordObjects);
+  }); // end of .then response
+}; // end of getAudio function
+
+
+
+
+
+
+
+
+
   /*---- COLLECTION NAME ----*/
   sv.addCollection = function(collectionToAdd) {
     //console.log("In Service with the collection:", collectionToAdd);
@@ -46,12 +83,21 @@ myApp.service('DefaultService', function($http) {
     });
   };
 
+  sv.getSelectedWords = function(id){
+    console.log('ID in service:', id);
+    return $http.get('/words/' + id).then(function(response){
+      return response;
+    });
+  };
+
   sv.deleteWord = function(id){
     return $http.delete('/words/' + id).then(function(response){
       //console.log('Deleted word:', response);
       return response;
     });
   };
+
+
 
 
 }); // end of myApp.service

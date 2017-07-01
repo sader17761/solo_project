@@ -18,6 +18,9 @@ myApp.config(function($routeProvider){
   }).when('/studentDashboard', {
       templateUrl: "views/partials/studentDashboard.html",
       controller: "DefaultController"
+  }).when('/quiz', {
+      templateUrl: "views/partials/quiz.html",
+      controller: "DefaultController"
   });
 });
 
@@ -25,6 +28,48 @@ myApp.controller('DefaultController', DefaultController);
 
 function DefaultController(DefaultService, $location) {
     var vm = this;
+
+    /*---- Global Variables ----*/
+    vm.quizState = false;
+    vm.spellingWordArray = [];
+    vm.wordCount = 1;
+
+
+    /*---- TAKE QUIZ ----*/
+    vm.takeQuiz = function(){
+      vm.quizState = true;
+    };
+
+    vm.nextWord = function(){
+      console.log('Count: ', vm.wordCount);
+      if(vm.wordCount === vm.spellingWordArray.length){
+        alert('Quiz Complete!');
+      } else {
+        vm.wordCount += 1;
+      }
+    };
+
+    vm.readSpellingWord = function(){
+      responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1], "US English Male", {volume: 1, rate: 0.9});
+    };
+
+    vm.readDef = function(){
+      DefaultService.getAudio(vm.spellingWordArray[vm.wordCount - 1]).then(function(){
+        //console.log('back with:', DefaultService.wordObjects);
+        responsiveVoice.speak(DefaultService.wordObjects[0].text, "US English Male", {volume: 1, rate: 0.85});
+      });
+    };
+
+    vm.readSpeech = function(){
+      responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1] + ', is a ' + DefaultService.wordObjects[0].speech, "US English Male", {volume: 1, rate: 0.9});
+    };
+
+
+    // Read word in admin. (text to speech)
+    vm.readWord = function(word){
+      console.log('Play button clicked: ', word);
+      responsiveVoice.speak(word, "US English Male", {volume: 1, rate: 0.9});
+    };
 
 
     /*---- COLLECTION NAME ----*/
@@ -106,6 +151,7 @@ function DefaultController(DefaultService, $location) {
         // clear 'Add word...' input
         vm.wordIn = '';
         vm.wordsArray = response.data;
+        console.log('This is what comes back in the words array:', vm.wordsArray);
       });
     };
 
@@ -118,10 +164,22 @@ function DefaultController(DefaultService, $location) {
       }
     };
 
-    vm.readWord = function(word){
-      console.log('Play button clicked: ', word);
-      responsiveVoice.speak(word, "US English Male", {volume: 1, rate: 0.9});
+    // called from the student dashboard...
+    vm.getSelectedWords = function(id){
+      console.log('ID: ', id);
+      DefaultService.getSelectedWords(id).then(function(response){
+        for (var i = 0; i < response.data.length; i++) {
+          vm.spellingWordArray.push(response.data[i].word);
+        }
+        console.log('Spelling Array:', vm.spellingWordArray);
+        vm.selectedWordsArray = response.data;
+        vm.selectedWordCollection = vm.selectedWordsArray[0].collectionName;
+        vm.wordArrayLength = vm.selectedWordsArray.length;
+
+      });
     };
+
+
 
 
 }
