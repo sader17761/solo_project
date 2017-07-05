@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Student Dashboard</h1>
+                        <h1>Welcome <span>Drew</span>!</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -41,7 +41,7 @@
                         <div class="submitBtn text-center" ng-show="dc.submitQuiz">
                             <h3>{{dc.selectedWordCollection}} quiz complete.</h3>
                             <p>You got <span>{{dc.numCorrect}}</span> out of <span>{{dc.numCorrect + dc.numIncorrect}}</span> words correct.</p>
-                            <button ng-click="" class="btn btn-success">Submit Quiz</button>
+                            <button ng-click="dc.submitQuizScore()" class="btn btn-success">Submit Quiz</button>
                         </div>
 
                     </div>

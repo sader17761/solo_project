@@ -30,48 +30,70 @@ function DefaultController(DefaultService, $location) {
     var vm = this;
 
     /*---- Global Variables ----*/
-    vm.collectionMessage = false;
-    vm.quizState = false;
-    vm.spellingWordArray = [];
-    vm.wordCount = 1;
-    vm.linkEnabled = true;
-    vm.numCorrect = 0;
-    vm.numIncorrect = 0;
+    vm.spellingWordArray = []; // gets filled when a collection is selected.
+    vm.incorrectWordsArray = []; // gets filled when a word is spelled incorrectly.
+    vm.collectionMessage = false; // turns to true when collection is selected.
+    vm.quizState = false; // turns to true when the start quiz button is clicked.
+    vm.linkEnabled = true; // disabled when start quiz button is clicked.
+    vm.submitQuiz = false; // will show at the completion of quiz.
+    vm.wordCount = 1; // keeps track of current word in quiz.
+    vm.numCorrect = 0; // keeps track of all correct spellings.
+    vm.numIncorrect = 0; // keeps track of all incorrect spellings.
 
 
     /*---- TAKE QUIZ ----*/
     vm.takeQuiz = function(){
       vm.quizState = true;
       vm.collectionMessage = false;
-      vm.submitQuiz = false;
       vm.linkEnabled = !vm.linkEnabled;
+    };
+
+    vm.submitQuizScore = function(){
+      vm.spellingWordArray = [];
+      vm.linkEnabled = true;
+      vm.submitQuiz = false;
+      vm.wordCount = 1;
+      vm.numCorrect = 0;
+      vm.numIncorrect = 0;
+    };
+
+    vm.gameComplete = function(){
+      if(vm.wordCount === vm.spellingWordArray.length){
+        vm.wordCount = vm.spellingWordArray.length;
+        vm.submitQuiz = true;
+        vm.quizState = false;
+      }
     };
 
     vm.checkSpelling = function(wordToBeChecked){
       var wordToLowerCase = wordToBeChecked.toLowerCase();
 
       if(wordToLowerCase === vm.spellingWordArray[vm.wordCount - 1]){
-        alert('Correct!');
-        vm.checkSpellingIn = '';
-        vm.wordCount += 1;
+        iziToast.success({
+            title: '',
+            color: 'green',
+            position: 'center',
+            timeout: 2000,
+            message: 'CORRECT!'
+        });
         vm.numCorrect += 1;
       } else {
-        alert('Incorrect.');
-        vm.checkSpellingIn = '';
-        vm.wordCount += 1;
+        iziToast.success({
+            title: '',
+            color: 'red',
+            position: 'center',
+            timeout: 2000,
+            message: 'Sorry, incorrect.'
+        });
         vm.numIncorrect += 1;
+        vm.incorrectWordsArray.push(vm.spellingWordArray[vm.wordCount - 1]);
+        console.log('List of incorrect words: ', vm.incorrectWordsArray);
       }
-      vm.gameComplete();
-    };
+      vm.gameComplete(); // after each word, the quiz is checked for completion.
+      vm.checkSpellingIn = '';  // input is emptied after spell check.
+      vm.wordCount += 1; // adds 1 to word count.
 
-    vm.gameComplete = function(){
-      if(vm.wordCount === vm.spellingWordArray.length + 1){
-        alert('Quiz Complete!');
-        vm.wordCount = vm.spellingWordArray.length;
-        vm.submitQuiz = true;
-        vm.quizState = false;
-      }
-    };
+    }; // end of checkSpelling function
 
     // Reads current word
     vm.readSpellingWord = function(){
@@ -154,20 +176,16 @@ function DefaultController(DefaultService, $location) {
       if(vm.wordIn === ''){
         alert('Please enter a word.');
       } else {
-        //console.log('Id attached to word is:', collId);
-        //console.log('Name attached to word is:', collName);
         var todaysDate = new Date();
         // create object to send to database
         var wordObject = {
           collectionId: collId,
           collectionName: collName,
-          word: vm.wordIn,
-          // rating: vm.ratingIn,
+          word: vm.wordIn.toLowerCase(),
           dateAdded: todaysDate
         };
         console.log('wordObject:', wordObject);
         DefaultService.addWord(wordObject).then(function(response){
-          //console.log('Response from Service: ', response);
           vm.getWordCollection(); // this will call the get function and display to DOM
         });
       }
