@@ -286,16 +286,24 @@ function DefaultController(DefaultService, $location) {
         };
         DefaultService.postLogin(credentials).then(function(response) {
           console.log('Login Response:', response);
-            if (response.data === 'we got it') {
+            if (response.data === 'bingo') {
                 //vm.name = credentials.username;
-                console.log('Password:', credentials.password);
+                // console.log('Password:', credentials.password);
                 vm.loginUsernameIn = '';
                 vm.loginPasswordIn = '';
-                alert('Congrats...you are logged in!');
+                alert('It\'s a match...welcome back!');
+                vm.getUserInformation(credentials.username);
             } else {
               alert("Whoah there!", "Check yer info, friendo", "error");
             }
         });
+    };
+
+    vm.getUserInformation = function(username){
+      console.log('Passing username:', username);
+      DefaultService.getAllUserInformation(username).then(function(response){
+        console.log('Getting all user information:', response);
+      });
     };
 
 

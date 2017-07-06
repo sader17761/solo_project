@@ -129,6 +129,13 @@ myApp.service('DefaultService', function($http) {
     });
   };
 
+  sv.getAllUserInformation = function(username){
+    console.log('Username in service:', username);
+    return $http.get('/' + username).then(function(response){
+      return response;
+    });
+  };
+
 
 
 

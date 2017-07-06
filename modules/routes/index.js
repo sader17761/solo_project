@@ -19,7 +19,6 @@ router.get('/', function(req, res){
 
 
 router.post('/', function(req, res) {
-  console.log('In server looking for credentials.');
   console.log('Find reqUsername:', req.body.username);
     users.findOne({
         username: req.body.username
@@ -34,7 +33,7 @@ router.post('/', function(req, res) {
                         res.send('we don\'t got it');
                     } else {
                         if (isMatch) {
-                            res.send('we got it');
+                            res.send('bingo');
                         } else {
                             res.send('we don\'t got it');
                         }
@@ -44,6 +43,16 @@ router.post('/', function(req, res) {
                 res.send('we don\'t got it');
             }
         }
+    });
+});
+
+router.get('/:username', function(req, res) {
+    console.log('In server looking for words with username:', req.params.username);
+    users.find({
+      username: req.params.username
+    }).then(function(response){
+        console.log('User request:', response);
+        res.send(response);
     });
 });
 
