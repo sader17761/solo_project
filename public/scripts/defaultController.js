@@ -287,8 +287,8 @@ function DefaultController(DefaultService, $location) {
         DefaultService.postLogin(credentials).then(function(response) {
           console.log('Login Response:', response);
             if (response.data === 'we got it') {
-                vm.name = credentials.username;
-                console.log(vm.name, credentials.username);
+                //vm.name = credentials.username;
+                console.log('Password:', credentials.password);
                 vm.loginUsernameIn = '';
                 vm.loginPasswordIn = '';
                 alert('Congrats...you are logged in!');

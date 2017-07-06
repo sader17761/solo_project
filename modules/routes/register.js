@@ -33,7 +33,7 @@ router.post('/', function(req, res) {
                         adminRights: req.body.adminRights
                     };
                     console.log('newUser is:', newUser);
-                    userRegistration(newUser).save();
+                    users(newUser).save();
                     res.sendStatus( 201 );
                 }
             });
