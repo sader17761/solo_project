@@ -3,7 +3,9 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand"><h4>Spelling Collections:</h4></li>
             <li ng-repeat="collection in dc.collectionArray">
-                <a href="" ng-click="dc.getSelectedWords(collection._id)" ng-class="dc.linkEnabled ? '' : 'inactive'">{{collection.collName}}</a>
+                <a href="" ng-click="dc.getSelectedWords(collection._id)" ng-class="dc.linkEnabled ? '' : 'inactive'">
+                  <p>{{collection.collName}}</p>
+                </a>
             </li>
         </ul>
     </div>
@@ -18,7 +20,10 @@
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="answerBox" ng-if="dc.collectionMessage">
-                            <h3>{{dc.selectedWordCollection}} <button class="btn btn-primary pull-right" ng-click="dc.takeQuiz()">Start Quiz</button></h3>
+                            <h3>{{dc.selectedWordCollection}}
+                                <span> - ({{dc.wordArrayLength}} words)</span>
+                                <button class="btn btn-primary pull-right" ng-click="dc.takeQuiz()">Start Quiz</button>
+                            </h3>
 
                         </div>
 

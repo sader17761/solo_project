@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-5">
       <div class="adminDashboardDiv" ng-init="dc.getCollectionNames()">
-        <h1>Admin. Dashboard</h1>
+        <h1>Word Collections</h1>
 
         <!-- add collection -->
         <form name="addCollectionForm" class="formDiv">
@@ -61,8 +61,43 @@
               </div>
             </div>
 
-          </div>
+          </div> <!-- end of panel-group -->
+        </div> <!-- end of class="adminDashboardDiv" -->
+
+      </div> <!-- end of col-md-6 -->
+
+      <!-- Start of Quiz Results -->
+      <div class="col-md-7">
+        <div class="adminDashboardDiv">
+          <h1>Quiz Results</h1>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Collection</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Results</th>
+                <th>Incorrect Words</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="result in dc.resultsData">
+                <td>{{result.studentName}}</td>
+                <td>{{result.collName}}</td>
+                <td>{{result.date | date:"MM/dd/yyyy" }}</td>
+                <td>{{result.date | date:"h:mma"}}</td>
+                <td>{{result.numWordsCorrect}} of {{result.numWordsCorrect + result.numWordsIncorrect}}</td>
+                <td>
+                  <ul>
+                    <li ng-repeat="words in result.wordsIncorrect">{{words}}</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-      </div> <!-- end of panel-group -->
-    </div> <!-- end of container -->
+      </div>
+    </div> <!-- end of row -->
+  </div> <!-- end of container -->

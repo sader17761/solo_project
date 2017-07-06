@@ -49,12 +49,33 @@ function DefaultController(DefaultService, $location) {
     };
 
     vm.submitQuizScore = function(){
-      vm.spellingWordArray = [];
-      vm.linkEnabled = true;
-      vm.submitQuiz = false;
-      vm.wordCount = 1;
-      vm.numCorrect = 0;
-      vm.numIncorrect = 0;
+      var todaysDate = new Date();
+      // create object to send to database
+      var quizObject = {
+        date: todaysDate,
+        collName: vm.selectedWordCollection,
+        studentName: 'Drew Sader',
+        numWordsCorrect: vm.numCorrect,
+        numWordsIncorrect: vm.numIncorrect,
+        wordsIncorrect: vm.incorrectWordsArray
+      };
+      DefaultService.addQuizResults(quizObject).then(function(response){
+        console.log('Response from Service: ', response);
+        vm.spellingWordArray = [];
+        vm.linkEnabled = true;
+        vm.submitQuiz = false;
+        vm.wordCount = 1;
+        vm.numCorrect = 0;
+        vm.numIncorrect = 0;
+      }); // end of addQuizResults
+    };
+
+    vm.getQuizResults = function(){
+      DefaultService.getResults().then(function(response){
+        //console.log('In Controller getting results response.', response);
+        vm.resultsData = response.data;
+        console.log('Results response: ', vm.resultsData);
+      });
     };
 
     vm.gameComplete = function(){
@@ -154,6 +175,7 @@ function DefaultController(DefaultService, $location) {
         vm.collectionIn = '';
         vm.collectionArray = response.data;
         vm.getWordCollection();
+        vm.getQuizResults();
       });
     };
 
@@ -197,7 +219,7 @@ function DefaultController(DefaultService, $location) {
         // clear 'Add word...' input
         vm.wordIn = '';
         vm.wordsArray = response.data;
-        console.log('This is what comes back in the words array:', vm.wordsArray);
+        //console.log('This is what comes back in the words array:', vm.wordsArray);
       });
     };
 
@@ -223,6 +245,37 @@ function DefaultController(DefaultService, $location) {
         vm.wordArrayLength = vm.selectedWordsArray.length;
         vm.collectionMessage = true;
       });
+    };
+
+
+    /*---- REGISTRATION ----*/
+    vm.registerUser = function() {
+      if(vm.passwordIn !== vm.passwordConfirmIn) {
+        alert('Your passwords don\'t match.');
+        vm.passwordIn = '';
+        vm.passwordConfirmIn = '';
+      } else {
+        // create object to send to database
+        var userObject = {
+          fname: vm.fnameIn,
+          lname: vm.lnameIn,
+          email: vm.emailIn,
+          username: vm.usernameIn,
+          password: vm.passwordIn,
+          grade: vm.gradeIn,
+          adminRights: 0
+        };
+        console.log('userObject:', userObject);
+        DefaultService.registerNewUser(userObject).then(function(response){
+          vm.fnameIn = '';
+          vm.lnameIn = '';
+          vm.emailIn = '';
+          vm.usernameIn = '';
+          vm.passwordIn = '';
+          vm.passwordConfirmIn = '';
+          vm.gradeIn = '';
+        });
+      }
     };
 
 

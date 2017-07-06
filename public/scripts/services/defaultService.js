@@ -4,6 +4,23 @@ myApp.service('DefaultService', function($http) {
   var sv = this;
 
 
+/*---- QUIZ RESULTS ----*/
+  sv.addQuizResults = function(scoreResults){
+    console.log('Score Results: ', scoreResults);
+    return $http.post('/score', scoreResults).then(function(response){
+      console.log('Back from adding quiz scores to DB with: ', response);
+      return response;  // return is needed when using .then in controller
+    });
+  };
+
+  sv.getResults = function() {
+    return $http.get('/score').then(function(response){
+      //console.log('DB -get- results response is:', response);
+      return response;
+    });
+  };
+
+
   /*---- AUDIO INFORMATION FROM API ----*/
   sv.getAudio = function(input){
     console.log('In getAudio with:', input);
@@ -33,9 +50,6 @@ myApp.service('DefaultService', function($http) {
       console.log('Word Objects:', sv.wordObjects);
   }); // end of .then response
 }; // end of getAudio function
-
-
-
 
 
 
@@ -95,6 +109,15 @@ myApp.service('DefaultService', function($http) {
   sv.deleteWord = function(id){
     return $http.delete('/words/' + id).then(function(response){
       //console.log('Deleted word:', response);
+      return response;
+    });
+  };
+
+
+  /*---- REGISTRATION ----*/
+  sv.registerNewUser = function(newUser){
+    console.log('In service with new user', newUser);
+    return $http.post('/register', newUser).then(function(response){
       return response;
     });
   };
