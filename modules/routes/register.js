@@ -1,28 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
+var users = require( '../users' );
 var bcrypt = require( 'bcrypt' );
 var mongoose = require('mongoose');
+
 
 // uses
 router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
-
-mongoose.connect('localhost:27017/soloProject'); // soloProject is the DB name
-
-// schema(s)
-var userSchema = new mongoose.Schema({
-    fname: String,
-    lname: String,
-    email: String,
-    username: String,
-    password: String,
-    grade: String,
-    adminRights: Number
-});
-
-// 'userRegistration' is the name of the collection in the 'soloProject' database
-var userRegistration = mongoose.model('userRegistration', userSchema);
 
 
 /*----  USER REGISTRATION ----*/
@@ -54,12 +40,6 @@ router.post('/', function(req, res) {
         }
     });
 });
-
-
-
-
-
-
 
 
 module.exports = router;

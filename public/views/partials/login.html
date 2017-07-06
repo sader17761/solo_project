@@ -11,16 +11,16 @@
 
                   <div style="margin-bottom: 25px" class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                    <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username" required autofocus>
+                    <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username" ng-model="dc.loginUsernameIn" required autofocus>
                   </div>
 
                   <div style="margin-bottom: 25px" class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required>
+                    <input id="login-password" type="password" class="form-control" name="password" placeholder="password" ng-model="dc.loginPasswordIn" required>
                   </div>
 
                   <label class="checkbox"><input type="checkbox" value="remember-me">Remember Me</label>
-                  <button class="btn btn-lg btn-primary btn-block" type="submit">LOGIN</button>
+                  <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="dc.loginUser()">LOGIN</button>
 
                 </form>
             </div>

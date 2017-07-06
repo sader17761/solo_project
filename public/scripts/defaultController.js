@@ -248,7 +248,7 @@ function DefaultController(DefaultService, $location) {
     };
 
 
-    /*---- REGISTRATION ----*/
+    /*---- REGISTRATION / LOGIN----*/
     vm.registerUser = function() {
       if(vm.passwordIn !== vm.passwordConfirmIn) {
         alert('Your passwords don\'t match.');
@@ -276,6 +276,26 @@ function DefaultController(DefaultService, $location) {
           vm.gradeIn = '';
         });
       }
+    };
+
+    vm.loginUser = function() {
+        console.log('Login User Clicked!');
+        var credentials = {
+            username: vm.loginUsernameIn,
+            password: vm.loginPasswordIn
+        };
+        DefaultService.postLogin(credentials).then(function(response) {
+          console.log('Login Response:', response);
+            if (response.data === 'we got it') {
+                vm.name = credentials.username;
+                console.log(vm.name, credentials.username);
+                vm.loginUsernameIn = '';
+                vm.loginPasswordIn = '';
+                alert('Congrats...you are logged in!');
+            } else {
+              alert("Whoah there!", "Check yer info, friendo", "error");
+            }
+        });
     };
 
 

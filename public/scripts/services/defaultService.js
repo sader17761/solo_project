@@ -122,6 +122,13 @@ myApp.service('DefaultService', function($http) {
     });
   };
 
+  sv.postLogin = function(loginCredentials){
+    console.log('In service with loginCredentials:', loginCredentials);
+    return $http.post('/', loginCredentials).then(function(response){
+      return response;
+    });
+  };
+
 
 
 
