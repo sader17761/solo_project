@@ -67,7 +67,7 @@ myApp.service('DefaultService', function($http) {
 
   sv.getCollections = function() {
     return $http.get('/collections').then(function(response){
-      //console.log('DB -get- response is:', response);
+      console.log('DB -get- response is:', response);
       return response;
     });
   };
@@ -131,7 +131,7 @@ myApp.service('DefaultService', function($http) {
 
   sv.getAllUserInformation = function(username){
     console.log('Username in service:', username);
-    return $http.get('/' + username).then(function(response){
+    return $http.get('/register/' + username).then(function(response){
       return response;
     });
   };

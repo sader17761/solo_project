@@ -14,7 +14,6 @@ var wordSchema = new mongoose.Schema({
     collectionId: String,
     collectionName: String,
     word: String,
-    // rating: Number,
     dateAdded: Date
 });
 

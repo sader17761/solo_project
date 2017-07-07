@@ -36,9 +36,9 @@ router.post('/', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    //console.log('In collections.js, getting from /, req.body is:', req.body);
+    console.log('In collections.js, getting from /, req.body is:', req.body);
     collectionName.find().then(function(response){
-        //console.log('Collection request:', response);
+        console.log('Collection request:', response);
         res.send(response);
     });
 });

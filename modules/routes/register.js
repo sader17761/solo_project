@@ -41,5 +41,15 @@ router.post('/', function(req, res) {
     });
 });
 
+router.get('/:username', function(req, res) {
+    console.log('In server looking for words with username:', req.params.username);
+    users.find({
+      username: req.params.username
+    }).then(function(response){
+        console.log('User request:', response);
+        res.send(response);
+    });
+});
+
 
 module.exports = router;

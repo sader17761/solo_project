@@ -23,11 +23,11 @@ router.post('/', function(req, res) {
     users.findOne({
         username: req.body.username
     }, function(err, users) {
-      console.log('Find users:', users.username);
+      //console.log('Find users:', users.username);
         if (err) {
             res.send('we don\'t got it');
         } else {
-            if (users != undefined) {
+            if (users != undefined) { // must be !=, it doesn't like !==
                 bcrypt.compare(req.body.password, users.password, function(err, isMatch) {
                     if (err) {
                         res.send('we don\'t got it');
@@ -46,14 +46,6 @@ router.post('/', function(req, res) {
     });
 });
 
-router.get('/:username', function(req, res) {
-    console.log('In server looking for words with username:', req.params.username);
-    users.find({
-      username: req.params.username
-    }).then(function(response){
-        console.log('User request:', response);
-        res.send(response);
-    });
-});
+
 
 module.exports = router;

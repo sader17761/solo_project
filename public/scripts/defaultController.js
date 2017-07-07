@@ -118,28 +118,28 @@ function DefaultController(DefaultService, $location) {
 
     // Reads current word
     vm.readSpellingWord = function(){
-      responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1], "US English Male", {volume: 1, rate: 0.9});
+      responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1], "US English Female", {volume: 1, rate: 0.9});
     };
 
     // Reads current word definition
     vm.readDef = function(){
       DefaultService.getAudio(vm.spellingWordArray[vm.wordCount - 1]).then(function(){
         //console.log('back with:', DefaultService.wordObjects);
-        responsiveVoice.speak(DefaultService.wordObjects[0].text, "US English Male", {volume: 1, rate: 0.85});
+        responsiveVoice.speak(DefaultService.wordObjects[0].text, "US English Female", {volume: 1, rate: 0.85});
       });
     };
 
     // Reads 'part of speech' (noun, verb, adjective, etc...)
     vm.readSpeech = function(){
       DefaultService.getAudio(vm.spellingWordArray[vm.wordCount - 1]).then(function(){
-        responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1] + ', is a ' + DefaultService.wordObjects[0].speech, "US English Male", {volume: 1, rate: 0.9});
+        responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1] + ', is a ' + DefaultService.wordObjects[0].speech, "US English Female", {volume: 1, rate: 0.9});
       });
     };
 
     // Read word in admin. (text to speech)
     vm.readWord = function(word){
       console.log('Play button clicked: ', word);
-      responsiveVoice.speak(word, "US English Male", {volume: 1, rate: 0.9});
+      responsiveVoice.speak(word, "US English Female", {volume: 1, rate: 0.9});
     };
 
 
@@ -170,7 +170,7 @@ function DefaultController(DefaultService, $location) {
 
     vm.getCollectionNames = function(){
       DefaultService.getCollections().then(function(response){
-        //console.log('In Controller getting collection response.', response);
+        console.log('In Controller getting collection response.', response);
         // clear 'Add word...' input
         vm.collectionIn = '';
         vm.collectionArray = response.data;
@@ -303,6 +303,7 @@ function DefaultController(DefaultService, $location) {
       console.log('Passing username:', username);
       DefaultService.getAllUserInformation(username).then(function(response){
         console.log('Getting all user information:', response);
+        console.log('Your name is: ', response.data[0].fname);
       });
     };
 
