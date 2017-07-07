@@ -29,6 +29,10 @@ myApp.controller('DefaultController', DefaultController);
 function DefaultController(DefaultService, $location) {
     var vm = this;
 
+    /*---- IMAGES ----*/
+
+    vm.bodyStyle = {background: "url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/b0e53331516629.565449774c2d4.png)"};
+
     /*---- Global Variables ----*/
     vm.spellingWordArray = []; // gets filled when a collection is selected.
     vm.incorrectWordsArray = []; // gets filled when a word is spelled incorrectly.
@@ -36,6 +40,9 @@ function DefaultController(DefaultService, $location) {
     vm.quizState = false; // turns to true when the start quiz button is clicked.
     vm.linkEnabled = true; // disabled when start quiz button is clicked.
     vm.submitQuiz = false; // will show at the completion of quiz.
+    vm.wordCollections = true; // adminDashboard-toggle view
+    vm.quizResults = false; // adminDashboard-toggle view
+    vm.quizReports = false; // adminDashboard-toggle view
     vm.wordCount = 1; // keeps track of current word in quiz.
     vm.numCorrect = 0; // keeps track of all correct spellings.
     vm.numIncorrect = 0; // keeps track of all incorrect spellings.
@@ -54,7 +61,7 @@ function DefaultController(DefaultService, $location) {
       var quizObject = {
         date: todaysDate,
         collName: vm.selectedWordCollection,
-        studentName: 'Drew Sader',
+        studentName: vm.fname + ' ' + vm.lname,
         numWordsCorrect: vm.numCorrect,
         numWordsIncorrect: vm.numIncorrect,
         wordsIncorrect: vm.incorrectWordsArray
@@ -235,16 +242,20 @@ function DefaultController(DefaultService, $location) {
     // called from the student dashboard...
     vm.getSelectedWords = function(id){
       console.log('ID: ', id);
-      DefaultService.getSelectedWords(id).then(function(response){
-        for (var i = 0; i < response.data.length; i++) {
-          vm.spellingWordArray.push(response.data[i].word);
-        }
-        console.log('Spelling Array:', vm.spellingWordArray);
-        vm.selectedWordsArray = response.data;
-        vm.selectedWordCollection = vm.selectedWordsArray[0].collectionName;
-        vm.wordArrayLength = vm.selectedWordsArray.length;
-        vm.collectionMessage = true;
-      });
+        if(vm.fname){
+        DefaultService.getSelectedWords(id).then(function(response){
+          for (var i = 0; i < response.data.length; i++) {
+            vm.spellingWordArray.push(response.data[i].word);
+          }
+          console.log('Spelling Array:', vm.spellingWordArray);
+          vm.selectedWordsArray = response.data;
+          vm.selectedWordCollection = vm.selectedWordsArray[0].collectionName;
+          vm.wordArrayLength = vm.selectedWordsArray.length;
+          vm.collectionMessage = true;
+        });
+      } else {
+        alert('Please log in before taking a quiz.');
+      }
     };
 
 
@@ -285,28 +296,32 @@ function DefaultController(DefaultService, $location) {
             password: vm.loginPasswordIn
         };
         DefaultService.postLogin(credentials).then(function(response) {
-          console.log('Login Response:', response);
+          //console.log('Login Response:', response);
             if (response.data === 'bingo') {
-                //vm.name = credentials.username;
-                // console.log('Password:', credentials.password);
+                vm.getUserInformation(credentials.username);
                 vm.loginUsernameIn = '';
                 vm.loginPasswordIn = '';
-                alert('It\'s a match...welcome back!');
-                vm.getUserInformation(credentials.username);
+                //alert('It\'s a match...welcome back!');
             } else {
-              alert("Whoah there!", "Check yer info, friendo", "error");
+              alert("Username and Password do not match.  Please try again, or Register.");
+              vm.loginUsernameIn = '';
+              vm.loginPasswordIn = '';
             }
         });
     };
 
     vm.getUserInformation = function(username){
-      console.log('Passing username:', username);
       DefaultService.getAllUserInformation(username).then(function(response){
-        console.log('Getting all user information:', response);
-        console.log('Your name is: ', response.data[0].fname);
+        //console.log('User logged is as: ', response.data[0].fname);
+        if(response.data[0].adminRights === 1){
+          $location.path('/adminDashboard').replace();
+        } else {
+          $location.path('/studentDashboard').replace();
+        }
+        vm.fname = response.data[0].fname;
+        vm.lname = response.data[0].lname;
       });
     };
-
 
 
 

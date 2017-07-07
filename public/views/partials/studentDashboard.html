@@ -8,13 +8,13 @@
                 </a>
             </li>
         </ul>
-    </div>
+    </div> <!-- end of sidebar-wrapper -->
     <div id="page-content-wrapper">
         <div class="page-content">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Welcome <span>Drew</span>!</h1>
+                        <h1 ng-if="dc.fname">Welcome back <span>{{dc.fname}}</span>!</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -49,9 +49,9 @@
                             <button ng-click="dc.submitQuizScore()" class="btn btn-success">Submit Quiz</button>
                         </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    </div> <!-- end of col-md-6 col-md-offset-3 -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of page-content -->
+    </div> <!-- end of page-content-wrapper -->
+</div> <!-- end of wrapper -->
