@@ -1,7 +1,8 @@
-<div id="wrapper" ng-init="dc.getCollectionNames()">
+<div class="studentDashBackgroundImg" id="wrapper" ng-init="dc.getCollectionNames()">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-            <li class="sidebar-brand"><h4>Spelling Collections:</h4></li>
+            <li><img class="profilePic" src="images/male.jpg" alt="profile pic"></li>
+            <li class="sidebar-brand"><h4>Welcome back <span>{{dc.fname}}</span>!</h4></li>
             <li ng-repeat="collection in dc.collectionArray">
                 <a href="" ng-click="dc.getSelectedWords(collection._id)" ng-class="dc.linkEnabled ? '' : 'inactive'">
                   <p>{{collection.collName}}</p>

@@ -14,22 +14,45 @@ h1 {
 }
 
 /*---- home.html partial ----*/
+
 .backgroundImage {
   margin-top: 50px;
-  width: 100%;
-  height: 750px;
-    /* The image used */
-    background-image: url('images/background1.png');
-
-    /* Full height */
-    height: 100%;
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  min-height: 760px;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05)
+    ),
+    url("../images/background1.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
+.backgroundImage img {
+  margin-top: 200px;
+  width: 100%;
+}
+
+.backgroundImage button {
+  width: 100%;
+  height: 70px;
+  background-color: rgba(255, 255, 255, 0.55);
+  border-radius: 15px;
+  border: 2px solid #00abc2;  //#008295
+  font-size: 24px;
+  color: #00abc2;
+  box-shadow: 5px 5px 10px rgba(26, 26, 26, 0.5);
+  transition: .3s ease-in-out;
+}
+
+.backgroundImage button:hover {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 15px;
+  border: 4px solid #734152;
+  font-size: 24px;
+  color: #734152;
+}
 
 
 
@@ -372,6 +395,20 @@ h1 {
 
 .studentDashboardDiv {
   margin-top: 80px;
+}
+
+.studentDashBackgroundImg {
+    margin-top: 50px;
+    min-height: 760px;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.05),
+        rgba(0, 0, 0, 0.05)
+      ),
+      url("../images/background2.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 
