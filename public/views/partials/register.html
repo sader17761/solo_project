@@ -1,52 +1,55 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="registerDiv">
+<div class="registerBackground">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="registerDiv">
 
-            <div class="reg-wall">
-              <div class="regHeader">
-                <i class="fa fa-user-plus regIcon" aria-hidden="true"></i>
-                <h2 >Sign up now</h2>
-                <p>Fill in the form below to gain instant access.</p>
-              </div>
+              <div class="reg-wall">
+                <div class="regHeader">
+                  <i class="fa fa-user-plus regIcon" aria-hidden="true"></i>
+                  <h2 >Sign up now</h2>
+                  <p>Fill in the form to gain instant access.</p>
+                </div>
 
-                <form class="form-register">
+                  <form class="form-register">
 
-                  <input id="reg-fname" type="text" class="form-control" name="fname" value="" placeholder="First Name" ng-model="dc.fnameIn" required autofocus>
+                    <input id="reg-fname" type="text" class="form-control usernameInput regInputStyle" name="fname" value="" placeholder="First Name" ng-model="dc.fnameIn" autocomplete="off" required >
 
-                  <input id="reg-lname" type="text" class="form-control" name="lname" value="" placeholder="Last Name" ng-model="dc.lnameIn" required>
+                    <input id="reg-lname" type="text" class="form-control regInputStyle" name="lname" value="" placeholder="Last Name" ng-model="dc.lnameIn" autocomplete="off" required>
 
-                  <input id="reg-email" type="email" class="form-control" name="email" value="" placeholder="Email" ng-model="dc.emailIn" required>
+                    <input id="reg-email" type="email" class="form-control regInputStyle" name="email" value="" placeholder="Email" ng-model="dc.emailIn" autocomplete="off" required>
 
-                  <input id="reg-username" type="text" class="form-control" name="username" value="" placeholder="Username" ng-model="dc.usernameIn" required>
+                    <input id="reg-username" type="text" class="form-control regInputStyle" name="username" value="" placeholder="Username" ng-model="dc.usernameIn" autocomplete="off" required>
 
-                  <input id="reg-password" type="password" class="form-control" name="password" value="" placeholder="Password" ng-model="dc.passwordIn" required>
+                    <input id="reg-password" type="password" class="form-control regInputStyle" name="password" value="" placeholder="Password" ng-model="dc.passwordIn" autocomplete="off" required>
 
-                  <input id="reg-passConfirm" type="password" class="form-control" name="passConfirm" value="" placeholder="Confirm Password" ng-model="dc.passwordConfirmIn" required>
+                    <input id="reg-passConfirm" type="password" class="form-control regInputStyle" name="passConfirm" value="" placeholder="Confirm Password" ng-model="dc.passwordConfirmIn" autocomplete="off" required>
 
-                  <select id="grade" class="form-control" ng-model="dc.gradeIn">
-                    <option value="" selected disabled>Please select an option...</option>
-                    <option value="0">Kindergarten</option>
-                    <option value="1">First Grade</option>
-                    <option value="2">Second Grade</option>
-                    <option value="3">Third Grade</option>
-                    <option value="4">Fourth Grade</option>
-                    <option value="5">Fifth Grade</option>
-                    <option value="6">Sixth Grade</option>
-                    <option disabled>──────────</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="parent">Parent</option>
-                  </select>
+                    <select id="grade" class="form-control regInputStyle" ng-model="dc.gradeIn">
+                      <option value="" selected disabled>Please select an option...</option>
+                      <option value="0">Kindergarten</option>
+                      <option value="1">First Grade</option>
+                      <option value="2">Second Grade</option>
+                      <option value="3">Third Grade</option>
+                      <option value="4">Fourth Grade</option>
+                      <option value="5">Fifth Grade</option>
+                      <option value="6">Sixth Grade</option>
+                      <option disabled>──────────</option>
+                      <option value="teacher">Teacher</option>
+                      <option value="parent">Parent</option>
+                    </select>
 
-                  <!-- * OPTIONAL * upload image file -->
-                  <!-- <p><span class="btn btn-file" ng-model="dc.imageIn"><input type="file"/></span></p> -->
+                    <!-- * OPTIONAL * upload image file -->
+                    <!-- <p><span class="btn btn-file" ng-model="dc.imageIn"><input type="file"/></span></p> -->
 
-                  <a href="#!/login" class="btn btn-lg btn-primary regBtn" type="submit" ng-click="dc.registerUser()">REGISTER</a>
+                    <a href="#!/login" class="btn btn-lg btn-primary regBtn" type="submit" ng-click="dc.registerUser()">REGISTER</a>
 
-                </form>
-            </div> <!-- end of account-wall -->
-            <a href="#!/login" class="text-center new-account">Back to Login</a>
+                  </form>
+                <a href="#!/login" class="text-center new-account">Back to Login</a>
+              </div> <!-- end of account-wall -->
 
+
+        </div>
       </div>
     </div>
   </div>

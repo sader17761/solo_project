@@ -40,9 +40,6 @@ function DefaultController(DefaultService, $location) {
     vm.quizState = false; // turns to true when the start quiz button is clicked.
     vm.linkEnabled = true; // disabled when start quiz button is clicked.
     vm.submitQuiz = false; // will show at the completion of quiz.
-    vm.wordCollections = true; // adminDashboard-toggle view
-    vm.quizResults = false; // adminDashboard-toggle view
-    vm.quizReports = false; // adminDashboard-toggle view
     vm.wordCount = 1; // keeps track of current word in quiz.
     vm.numCorrect = 0; // keeps track of all correct spellings.
     vm.numIncorrect = 0; // keeps track of all incorrect spellings.
@@ -318,9 +315,19 @@ function DefaultController(DefaultService, $location) {
         } else {
           $location.path('/studentDashboard').replace();
         }
-        vm.fname = response.data[0].fname;
-        vm.lname = response.data[0].lname;
+        vm.fname = response.data[0].fname; // capturing first name after login
+        vm.lname = response.data[0].lname; // capturing last name after login
+        vm.rights = response.data[0].adminRights; // capturing last name after login
+        console.log('First Name:', vm.fname);
+        console.log('Last Name:', vm.lname);
+        console.log('Rights:', vm.rights);
       });
+    };
+
+    vm.logout = function() {
+      vm.fname = '';
+      vm.lname = '';
+      vm.rights = '';
     };
 
 

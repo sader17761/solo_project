@@ -6,18 +6,57 @@ $registrationFont: #bcbfc4;
 
 /*--------- END GLOBAL VARIABLES --------*/
 
-
-
-
 h1 {
   color: $primary;
 }
+
+
+
+
+
+/*---- index.html ----*/
+.customNav {
+  height: 50px;
+  background-color: #007a6e;
+  border-bottom: 1px solid #039e8f;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.logoWord1 {
+  font-size: 20px;
+  font-weight: bolder;
+  color: #fff;
+}
+
+.logoWord2 {
+  font-size: 20px;
+  font-weight: 300;
+  color: #fff;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  padding: 15px 30px;
+  color: #fff;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+  padding: 15px 29px;
+  color: #fff;
+  background-color: #004048;
+  border-left: 1px solid #039e8f;
+  border-right: 1px solid #039e8f;
+}
+
+
+
+
+
 
 /*---- home.html partial ----*/
 
 .backgroundImage {
   margin-top: 50px;
-  min-height: 760px;
+  min-height: 753px;
   background: linear-gradient(
       rgba(0, 0, 0, 0.05),
       rgba(0, 0, 0, 0.05)
@@ -34,9 +73,14 @@ h1 {
   width: 100%;
 }
 
-.backgroundImage button {
-  width: 100%;
-  height: 70px;
+.lgBtn {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 200;
+  width: 340px;
+  padding: 14px 0;
+  margin: 30px auto;
   background-color: rgba(255, 255, 255, 0.55);
   border-radius: 15px;
   border: 2px solid #00abc2;  //#008295
@@ -46,7 +90,9 @@ h1 {
   transition: .3s ease-in-out;
 }
 
-.backgroundImage button:hover {
+.lgBtn:hover {
+  text-decoration: none;
+  padding: 12px 0;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 15px;
   border: 4px solid #734152;
@@ -56,7 +102,25 @@ h1 {
 
 
 
+
+
+
+
 /*---- login.html partial ----*/
+.loginBackground {
+  margin-top: 50px;
+  min-height: 753px;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05)
+    ),
+    url("../images/background2.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .quoteText {
   margin-top: 20px;
   font-family: 'Quicksand', sans-serif;
@@ -64,93 +128,91 @@ h1 {
 }
 
 .loginDiv {
-  margin-top: 80px;
+  margin-top: 170px;
 }
 
-.welcomeText {
-  font-size: 72px;
-}
+// .welcomeText {
+//   font-size: 72px;
+//   color: #8b205f; //4c1450  26bad3
+//   text-shadow: 2px 2px 4px rgba(32, 32, 32, 0.5);
+// }
 
 .login-wall {
     width: 80%;
     margin-left: 10%;
     margin-top: 30px;
-    padding: 0 0 20px 0;
-    background-color: #f7f7f7;
-    border: 1px solid #c3c3c3;
+    padding: 40px 0 25px 0;
+    background-color: rgba(#360934, 0.45);
+    border: 3px solid rgba(#360934, 0.75);
+    border-radius: 15px;
     -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
-    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
-}
-
-.loginHeader {
-  position: relative;
-  top: 0;
-  width: 100%;
-  height: 120px;
-  padding: 30px 0 0 0;
-  margin-bottom: 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #c3c3c3;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4);
 }
 
 .loginHeader i {
   float: left;
   font-size: 60px;
   margin-left: 40px;
-  margin-right: 30px;
-  color: $registrationFont;
+  margin-right: 20px;
+  color: rgba(#fff, 1);
 }
 
 .loginHeader h2 {
   margin: 0;
   margin-top: 5px;
-  color: $registrationFont;
+  font-weight: 400;
+  color: rgba(#fff, 1);
 }
 
 .loginHeader p {
-  color: $registrationFont;
+  font-weight: 300;
+  letter-spacing: 1.15px;
+  color: rgba(#fff, 1);
 }
 
+.usernameInput {
+  margin-top: 15px;
+  width: 100%;
+}
 
+.loginBtnStyle {
+  border-radius: 5px;
+  margin-top: 30px;
+  background: #48efd2;
+  transition: .3s ease-in-out;
+}
+
+.loginBtnStyle:hover {
+  background-color: #31b69f;
+}
+
+.new-account {
+    display: block;
+    font-weight: 200;
+    letter-spacing: 1.15px;
+    margin-top: 10px;
+    color: rgba(#ffffff, 1);
+    transition: .3s ease-in-out;
+}
+
+.new-account:hover {
+  color: #48efd2;
+  text-decoration: none;
+}
+
+input.form-control,input.form-control:focus {
+    box-shadow: none;
+   -webkit-box-shadow: none;
+   -moz-box-shadow: none;
+   -moz-transition: none;
+   -webkit-transition: none;
+}
 
 .form-signin {
     max-width: 330px;
     padding: 15px;
     margin: 0 auto;
-}
-
-.form-signin .form-signin-heading, .form-signin .checkbox {
-    margin-bottom: 10px;
-}
-
-.form-signin .checkbox {
-    font-weight: normal;
-    margin-left: 20px;
-}
-
-.form-signin .form-control {
-    position: relative;
-    font-size: 16px;
-    height: auto;
-    padding: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.form-signin .form-control:focus {
-    z-index: 2;
-}
-
-.form-signin input[type="text"] {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.form-signin input[type="password"] {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
 }
 
 .profile-img {
@@ -163,67 +225,75 @@ h1 {
     border-radius: 50%;
 }
 
-.need-help {
-    margin-top: 10px;
-}
-
-.new-account {
-    display: block;
-    margin-top: 10px;
-}
-
 .input-group span i {
   font-size: 18px;
   margin-bottom: 4px;
 }
 
+.loginInputStyle {
+  background-color: #360934;
+  color: #fff;
+  border: 1px solid #360934;
+}
+
+
+
+
+
 
 
 
 /*---- register.html partial ----*/
+.registerBackground {
+  margin-top: 50px;
+  min-height: 753px;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05)
+    ),
+    url("../images/background4.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .registerDiv {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .reg-wall {
     width: 80%;
     margin-left: 10%;
     margin-top: 30px;
-    padding: 0 0 20px 0;
-    background-color: #f7f7f7;
-    border: 1px solid #c3c3c3;
+    padding: 40px 0 20px 0;
+    background-color: rgba(#05182d, 0.45);
+    border: 3px solid rgba(#05182d, 0.75);
+    border-radius: 15px;
     -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
-}
-
-.regHeader {
-  position: relative;
-  top: 0;
-  width: 100%;
-  height: 120px;
-  padding: 30px 0 0 0;
-  margin-bottom: 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #c3c3c3;
 }
 
 .regHeader i {
   float: left;
   font-size: 60px;
   margin-left: 40px;
-  margin-right: 30px;
-  color: $registrationFont;
+  margin-right: 15px;
+  color: #fff;
 }
 
 .regHeader h2 {
   margin: 0;
   margin-top: 5px;
-  color: $registrationFont;
+  font-weight: 400;
+  color: rgba(#fff, 1);
 }
 
 .regHeader p {
-  color: $registrationFont;
+  font-weight: 300;
+  letter-spacing: 1.15px;
+  color: rgba(#fff, 1);
 }
 
 .form-register {
@@ -251,6 +321,24 @@ h1 {
 
 .regBtn {
   width: 100%;
+  border-radius: 5px;
+  background: #48efd2;
+  transition: .3s ease-in-out;
+}
+
+.regBtn:hover {
+  background-color: #31b69f;
+}
+
+.regInputStyle {
+  background-color: #05182d;
+  color: #fff;
+  border: 1px solid #05182d;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #05182d inset;
+    color: #fff;
 }
 
 
@@ -404,7 +492,7 @@ h1 {
         rgba(0, 0, 0, 0.05),
         rgba(0, 0, 0, 0.05)
       ),
-      url("../images/background2.png") no-repeat center center fixed;
+      url("../images/background3.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -426,6 +514,7 @@ h1 {
   left: 250px;
   width: 250px;
   background: #CCC;
+  background-color: rgba(black, 0.5);
   position: fixed;
   height: 100%;
   overflow-y: auto;
@@ -444,6 +533,10 @@ h1 {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.sidebar-brand h4 {
+  
 }
 
 @media (max-width:767px) {

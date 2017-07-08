@@ -21,7 +21,7 @@
   </head>
   <body ng-app="myApp" ng-controller="DefaultController as dc">
     <!-- start of navbar -->
-    <nav class="navbar-inverse navbar-default navbar-fixed-top">
+    <nav class="navbar-inverse navbar-default navbar-fixed-top customNav">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -30,15 +30,16 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-          <a class="navbar-brand" href="#"><span class="">SPELLBOUND</span></a>
+          <a class="navbar-brand" href="#"><span class=""><span class="logoWord1">SPELL</span><span class="logoWord2">BOUND</span></span></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav pull-right">
-            <li><a class="btnColor" href="#!/">Home <span class="sr-only">(current)</span></a></li>
-            <li><a class="btnColor" href="#!/adminDashboard">Admin</a></li>
-            <li><a class="btnColor" href="#!/studentDashboard">Student</a></li>
+            <li ng-if="!dc.fname"><a class="btnColor" href="#!/">Home <span class="sr-only">(current)</span></a></li>
+            <!-- <li ng-if="dc.rights == 1"><a class="btnColor" href="#!/adminDashboard">Admin Dashboard</a></li> -->
+            <li ><a class="btnColor" href="#!/studentDashboard">Student Dashboard</a></li>  <!--ng-if="dc.rights == 0"-->
             <!-- <li><a class="btnColor" href="#!/quiz">Quiz</a></li> -->
-            <li><a class="btnColor" href="#!/login">Login/Register</a></li>
+            <li ng-if="!dc.fname"><a class="btnColor" href="#!/login">Login/Register</a></li>
+            <li ng-if="dc.fname"><a class="btnColor" href="#!/" ng-click="dc.logout()">Log Out</a></li>
           </ul>
         </div> <!-- end of navbar-collapse -->
       </div> <!-- end of container -->

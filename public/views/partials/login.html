@@ -1,35 +1,29 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="loginDiv">
-        <h1 class="text-center welcomeText">Welcome!</h1>
-        <h4 class="text-center quoteText">Today you will be great.</h4>
-            <div class="login-wall">
+<div class="loginBackground">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="loginDiv">
+          <!-- <h1 class="text-center welcomeText">Welcome!</h1> -->
+          <!-- <h4 class="text-center quoteText">Today you will be great.</h4> -->
+              <div class="login-wall">
 
-              <div class="loginHeader">
-                  <i class="fa fa-key regIcon" aria-hidden="true"></i>
-                  <h2 >Login to our site</h2>
-                  <p>Enter username and password to login.</p>
-              </div>
+                <div class="loginHeader">
+                    <i class="fa fa-key regIcon" aria-hidden="true"></i>
+                    <h2 >Login to our site</h2>
+                    <p>Enter username and password to login.</p>
+                </div>
 
                 <form class="form-signin">
+                  <input id="login-username" type="text" class="form-control usernameInput loginInputStyle" name="username" value="" placeholder="username" ng-model="dc.loginUsernameIn" autocomplete="off" autocomplete="off" required>
 
-                  <div style="margin-bottom: 25px" class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                    <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username" ng-model="dc.loginUsernameIn" required autofocus>
-                  </div>
+                  <input id="login-password" type="password" class="form-control usernameInput loginInputStyle" name="password" placeholder="password" ng-model="dc.loginPasswordIn" autocomplete="off" required>
 
-                  <div style="margin-bottom: 25px" class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input id="login-password" type="password" class="form-control" name="password" placeholder="password" ng-model="dc.loginPasswordIn" required>
-                  </div>
-
-                  <label class="checkbox"><input type="checkbox" value="remember-me">Remember Me</label>
-                  <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="dc.loginUser()">LOGIN</button>
-
+                  <button class="btn btn-lg btn-primary btn-block loginBtnStyle" type="submit" ng-click="dc.loginUser()">LOGIN</button>
                 </form>
-            </div>
-            <a href="#!/register" class="text-center new-account">Create an account </a>
+                <a href="#!/register" class="text-center new-account">Create an account </a>
+              </div>
+
+        </div>
       </div>
     </div>
   </div>
