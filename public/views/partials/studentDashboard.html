@@ -1,9 +1,12 @@
 <div class="studentDashBackgroundImg" id="wrapper" ng-init="dc.getCollectionNames()">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-            <li><img class="profilePic" src="images/male.jpg" alt="profile pic"></li>
-            <li class="sidebar-brand text-center"><h4>Welcome back <span>{{dc.fname}}</span>!</h4></li>
-            <li ng-repeat="collection in dc.collectionArray">
+            <li><img class="profilePic" src="images/drew1.jpg" alt="profile pic"></li>
+            <li class="sidebar-brand text-center">
+                <h3>{{dc.fname}} {{dc.lname}}</h3>
+                <p>{{dc.grade}}</p>
+            </li>
+            <li class="wordCollectionLinks" ng-repeat="collection in dc.collectionArray">
                 <a href="" ng-click="dc.getSelectedWords(collection._id)" ng-class="dc.linkEnabled ? '' : 'inactive'">
                   <p>{{collection.collName}}</p>
                 </a>
@@ -14,18 +17,11 @@
         <div class="page-content">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        <h1 ng-if="dc.fname">Welcome back <span>{{dc.fname}}</span>!</h1>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <div class="answerBox" ng-if="dc.collectionMessage">
-                            <h3>{{dc.selectedWordCollection}}
-                                <span> - ({{dc.wordArrayLength}} words)</span>
-                                <button class="btn btn-primary pull-right" ng-click="dc.takeQuiz()">Start Quiz</button>
-                            </h3>
-
+                        <div class="quizCollectionDiv" ng-if="dc.collectionMessage">
+                            <h3>{{dc.selectedWordCollection}}</h3>
+                            <h4>{{dc.wordArrayLength}} words</h4>
+                            <button class="btn btn-primary startQuizBtn" ng-click="dc.takeQuiz()">Start Quiz</button>
                         </div>
 
                         <!-- start quiz section -->

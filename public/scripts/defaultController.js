@@ -317,6 +317,7 @@ function DefaultController(DefaultService, $location) {
         }
         vm.fname = response.data[0].fname; // capturing first name after login
         vm.lname = response.data[0].lname; // capturing last name after login
+        vm.grade = response.data[0].grade; // capturing last name after login
         vm.rights = response.data[0].adminRights; // capturing last name after login
         console.log('First Name:', vm.fname);
         console.log('Last Name:', vm.lname);

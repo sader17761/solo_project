@@ -461,18 +461,7 @@ input:-webkit-autofill {
   color: rgb(172, 172, 172);
 }
 
-.profilePic {
-  // position: relative;
-  // top: 30px;
-  // left: 50px;
-  width: 150px;
-  height:150px;
-  border-radius: 50%;
-  margin: 20px 45px;
-  background-color: #fff;
-  border: 1px solid #807c7c;
-  box-shadow: 1px 1px 6px #707070;
-}
+
 
 
 
@@ -514,7 +503,7 @@ input:-webkit-autofill {
   left: 250px;
   width: 250px;
   background: #CCC;
-  background-color: rgba(black, 0.5);
+  background-color: rgba(#2b2b2b, 1);
   position: fixed;
   height: 100%;
   overflow-y: auto;
@@ -535,9 +524,44 @@ input:-webkit-autofill {
   padding: 0;
 }
 
-.sidebar-brand h4 {
-  
+.profilePic {
+  width: 150px;
+  height:150px;
+  border-radius: 50%;
+  margin: 30px 50px 5px 50px;
+  background-color: #fff;
+  box-shadow: 1px 1px 12px #171717;
 }
+
+.sidebar-brand h3 {
+  color: #a3f2ce;
+}
+
+.sidebar-brand p {
+  color: #a3f2ce;
+  margin-bottom: 25px;
+}
+
+.wordCollectionLinks {
+  text-align: center;
+  padding: 14px 0 8px 0;
+}
+
+.wordCollectionLinks:hover {
+  padding: 12px 0 6px 0;
+  border-top: 2px solid #0f0f0f;
+  border-bottom: 2px solid #1d1d1d;
+  border-right: 6px solid #0f0f0f;
+  border-left: 6px solid #cadd72;
+  background-color: rgba(#161515, 1);
+  color: #cadd72;
+}
+
+.wordCollectionLinks a {
+  text-decoration: none;
+  color: #cadd72;
+}
+
 
 @media (max-width:767px) {
 
@@ -566,6 +590,49 @@ input:-webkit-autofill {
     width: 1%;
     white-space: nowrap;
     vertical-align: bottom;
+}
+
+.quizCollectionDiv {
+  margin-top: 200px;
+  text-align: center;
+  width: 100%;
+  min-height: 200px;
+}
+
+.quizCollectionDiv h3 {
+  display: block;
+  font-size: 52px;
+}
+
+.quizCollectionDiv h4 {
+  display: block;
+  font-size: 38px;
+}
+
+.startQuizBtn {
+  display: block;
+  width: 50%;
+  margin: 30px auto;
+  height: 60px;
+  font-size: 24px;
+  background-color: #421649;
+  border-color: #421649;
+  color: #a4779e;
+  border-radius: 30px;
+}
+
+.startQuizBtn:hover {
+  background-color: #835188;
+  border-color: #835188;
+  color: #421649;
+}
+
+.startQuizBtn:active:focus {
+  position: relative;
+  top: 2px;
+  color: #421649;
+  background-color: #835188;
+  border-color: #835188;
 }
 
 .quizForm {
