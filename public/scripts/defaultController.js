@@ -38,18 +38,20 @@ function DefaultController(DefaultService, $location) {
     vm.incorrectWordsArray = []; // gets filled when a word is spelled incorrectly.
     vm.collectionMessage = false; // turns to true when collection is selected.
     vm.quizState = false; // turns to true when the start quiz button is clicked.
-    vm.linkEnabled = true; // disabled when start quiz button is clicked.
+    vm.isDisabled = false; // disabled when start quiz button is clicked.
     vm.submitQuiz = false; // will show at the completion of quiz.
     vm.wordCount = 1; // keeps track of current word in quiz.
     vm.numCorrect = 0; // keeps track of all correct spellings.
     vm.numIncorrect = 0; // keeps track of all incorrect spellings.
 
 
+
+
     /*---- TAKE QUIZ ----*/
     vm.takeQuiz = function(){
       vm.quizState = true;
       vm.collectionMessage = false;
-      vm.linkEnabled = !vm.linkEnabled;
+      vm.isDisabled = true;
     };
 
     vm.submitQuizScore = function(){
@@ -66,7 +68,7 @@ function DefaultController(DefaultService, $location) {
       DefaultService.addQuizResults(quizObject).then(function(response){
         console.log('Response from Service: ', response);
         vm.spellingWordArray = [];
-        vm.linkEnabled = true;
+        vm.isDisabled = false;
         vm.submitQuiz = false;
         vm.wordCount = 1;
         vm.numCorrect = 0;
@@ -117,8 +119,10 @@ function DefaultController(DefaultService, $location) {
       vm.gameComplete(); // after each word, the quiz is checked for completion.
       vm.checkSpellingIn = '';  // input is emptied after spell check.
       vm.wordCount += 1; // adds 1 to word count.
-
     }; // end of checkSpelling function
+
+
+
 
     // Reads current word
     vm.readSpellingWord = function(){
@@ -145,6 +149,9 @@ function DefaultController(DefaultService, $location) {
       console.log('Play button clicked: ', word);
       responsiveVoice.speak(word, "US English Female", {volume: 1, rate: 0.9});
     };
+
+
+
 
 
     /*---- COLLECTION NAME ----*/
@@ -193,6 +200,7 @@ function DefaultController(DefaultService, $location) {
         });
       }
     };
+
 
 
 
@@ -256,6 +264,8 @@ function DefaultController(DefaultService, $location) {
     };
 
 
+
+
     /*---- REGISTRATION / LOGIN----*/
     vm.registerUser = function() {
       if(vm.passwordIn !== vm.passwordConfirmIn) {
@@ -296,6 +306,8 @@ function DefaultController(DefaultService, $location) {
           //console.log('Login Response:', response);
             if (response.data === 'bingo') {
                 vm.getUserInformation(credentials.username);
+                localStorage.setItem('username', credentials.username);
+                localStorage.setItem('password', credentials.password);
                 vm.loginUsernameIn = '';
                 vm.loginPasswordIn = '';
                 //alert('It\'s a match...welcome back!');
@@ -315,20 +327,48 @@ function DefaultController(DefaultService, $location) {
         } else {
           $location.path('/studentDashboard').replace();
         }
+        localStorage.setItem('firstname', response.data[0].fname);
+        localStorage.setItem('lastname', response.data[0].lname);
+        localStorage.setItem('grade', response.data[0].grade);
+        localStorage.setItem('rights', response.data[0].adminRights);
         vm.fname = response.data[0].fname; // capturing first name after login
         vm.lname = response.data[0].lname; // capturing last name after login
         vm.grade = response.data[0].grade; // capturing last name after login
         vm.rights = response.data[0].adminRights; // capturing last name after login
-        console.log('First Name:', vm.fname);
-        console.log('Last Name:', vm.lname);
-        console.log('Rights:', vm.rights);
       });
     };
 
+    vm.getLoginInformation = function(){
+      vm.username = localStorage.getItem('username');
+      vm.password = localStorage.getItem('password');
+      vm.fname = localStorage.getItem('firstname');
+      vm.lname = localStorage.getItem('lastname');
+      vm.grade = localStorage.getItem('grade');
+      vm.rights = localStorage.getItem('rights');
+    };
+
     vm.logout = function() {
+      vm.username = '';
+      vm.password = '';
       vm.fname = '';
       vm.lname = '';
       vm.rights = '';
+      vm.grade = '';
+      localStorage.setItem('username', '');
+      localStorage.setItem('password', '');
+      localStorage.setItem('firstname', '');
+      localStorage.setItem('lastname', '');
+      localStorage.setItem('grade', '');
+      localStorage.setItem('rights', '');
+      vm.spellingWordArray = [];
+      vm.incorrectWordsArray = [];
+      vm.collectionMessage = false;
+      vm.quizState = false;
+      vm.isDisabled = false;
+      vm.submitQuiz = false;
+      vm.wordCount = 1;
+      vm.numCorrect = 0;
+      vm.numIncorrect = 0;
     };
 
 
