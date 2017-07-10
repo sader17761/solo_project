@@ -36,6 +36,7 @@ function DefaultController(DefaultService, $location) {
     /*---- Global Variables ----*/
     vm.spellingWordArray = []; // gets filled when a collection is selected.
     vm.incorrectWordsArray = []; // gets filled when a word is spelled incorrectly.
+    vm.quoteMessage = true;
     vm.collectionMessage = false; // turns to true when collection is selected.
     vm.quizState = false; // turns to true when the start quiz button is clicked.
     vm.isDisabled = false; // disabled when start quiz button is clicked.
@@ -43,8 +44,6 @@ function DefaultController(DefaultService, $location) {
     vm.wordCount = 1; // keeps track of current word in quiz.
     vm.numCorrect = 0; // keeps track of all correct spellings.
     vm.numIncorrect = 0; // keeps track of all incorrect spellings.
-
-
 
 
     /*---- TAKE QUIZ ----*/
@@ -67,9 +66,11 @@ function DefaultController(DefaultService, $location) {
       };
       DefaultService.addQuizResults(quizObject).then(function(response){
         console.log('Response from Service: ', response);
+        vm.randomQuote();
         vm.spellingWordArray = [];
         vm.isDisabled = false;
         vm.submitQuiz = false;
+        vm.quoteMessage = true;
         vm.wordCount = 1;
         vm.numCorrect = 0;
         vm.numIncorrect = 0;
@@ -257,6 +258,7 @@ function DefaultController(DefaultService, $location) {
           vm.selectedWordCollection = vm.selectedWordsArray[0].collectionName;
           vm.wordArrayLength = vm.selectedWordsArray.length;
           vm.collectionMessage = true;
+          vm.quoteMessage = false;
         });
       } else {
         alert('Please log in before taking a quiz.');
@@ -298,6 +300,7 @@ function DefaultController(DefaultService, $location) {
 
     vm.loginUser = function() {
         console.log('Login User Clicked!');
+        vm.randomQuote();
         var credentials = {
             username: vm.loginUsernameIn,
             password: vm.loginPasswordIn
@@ -371,6 +374,91 @@ function DefaultController(DefaultService, $location) {
       vm.numIncorrect = 0;
     };
 
+    vm.randomQuote = function(){
+      vm.motivationalQuotes = [
+        {
+          quote: "Don’t let what you can’t do stop you from doing what you can do.", author: "John Wooden"
+        },
+        {
+          quote: "Happiness doesn't result from what we get, but from what we give.", author: "Ben Carson"
+        },
+        {
+          quote: "I think I can. I know I can.",
+          author: ""
+        },
+        {
+          quote: "It’s not what happens to you, but how you react to it that matters.",
+          author: "Epictetus"
+        },
+        {
+          quote: "Being kind is never wasted.",
+          author: ""
+        },
+        {
+          quote: "When you know better you do better.",
+          author: "Maya Angelou"
+        },
+        {
+          quote: "Do what you can, with what you have, where you are.",
+          author: "Theodore Roosevelt"
+        },
+        {
+          quote: "You always pass failure on the way to success.",
+          author: "Mickey Rooney"
+        },
+        {
+          quote: "Make each day your masterpiece.",
+          author: "John Wooden"
+        },
+        {
+          quote: "Reach high, for stars lie hidden in your soul. Dream deep, for every dream precedes the goal.",
+          author: "Pamela Vaull Starr"
+        },
+        {
+          quote: "No one is perfect – that’s why pencils have erasers.",
+          author: "Wolfgang Riebe"
+        },
+        {
+          quote: "Never waste a minute thinking of anyone you don’t like.",
+          author: "Eisenhower"
+        },
+        {
+          quote: "Only surround yourself with people who will lift you higher.",
+          author: "Oprah Winfrey"
+        },
+        {
+          quote: "Why fit in when you were born to stand out?",
+          author: "Dr. Suess"
+        },
+        {
+          quote: "Never let the odds keep you from doing what you know in your heart you were meant to do.",
+          author: "H. Jackson Brown"
+        },
+        {
+          quote: "There is a voice inside of you, that whispers all day long, I feel this is right for me, I know that this is wrong.",
+          author: ""
+        },
+        {
+          quote: "You can steer yourself any direction you choose.",
+          author: "Dr. Suess"
+        },
+        {
+          quote: "The more that you read, the more things you will know. The more that you learn, the more places you’ll go.",
+          author: "Dr. Suess"
+        },
+        {
+          quote: "Anything is possible. Anything can be.",
+          author: "Shel Silverstein"
+        },
+      ];
+
+      var randomNum = Math.floor(Math.random() * 18) + 0;
+      console.log('Random Number is: ', randomNum);
+
+      vm.quote = vm.motivationalQuotes[randomNum].quote;
+      vm.author = vm.motivationalQuotes[randomNum].author;
+
+    }; // end of vm.randomQuote function
 
 
 }

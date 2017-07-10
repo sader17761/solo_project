@@ -1,4 +1,4 @@
-<div class="studentDashBackgroundImg" id="wrapper" ng-init="dc.getCollectionNames(); dc.getLoginInformation();">
+<div class="studentDashBackgroundImg" id="wrapper" ng-init="dc.getCollectionNames(); dc.getLoginInformation(); dc.randomQuote();">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li><img class="profilePic" src="images/drew1.jpg" alt="profile pic"></li>
@@ -6,8 +6,8 @@
                 <h3>{{dc.fname}} {{dc.lname}}</h3>
                 <p>{{dc.grade}}</p>
             </li>
-            <li class="wordCollectionLinks" ng-repeat="collection in dc.collectionArray">
-                <button class="collectionBtn" ng-click="dc.getSelectedWords(collection._id)" ng-disabled="dc.isDisabled">
+            <li class="sidebarLinks" ng-repeat="collection in dc.collectionArray">
+                <button class="sidebarBtn" ng-click="dc.getSelectedWords(collection._id)" ng-disabled="dc.isDisabled">
                   {{collection.collName}}
                 </button>
             </li>
@@ -18,6 +18,15 @@
     <div id="page-content-wrapper">
         <div class="page-content">
             <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="quoteDiv" ng-if="dc.quoteMessage">
+                            <h3>{{dc.quote}}</h3>
+                            <h4 ng-if="dc.author != ''"><em>- {{dc.author}}</em></h4>
+                        </div> <!-- end of quoteDiv -->
+                    </div> <!-- end of col-md-8 col-md-offset-2 -->
+                </div> <!-- end of row -->
+
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="quizCollectionDiv" ng-if="dc.collectionMessage">
@@ -39,7 +48,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <input class="input-check-word removeFocus" type="text" placeholder="Spell your word here..." ng-model="dc.checkSpellingIn" required/>
+                                    <input class="input-check-word removeFocus" type="text" placeholder="enter your word here" ng-model="dc.checkSpellingIn" required/>
                                 </div>
                             </div>
                             <div class="row">
@@ -58,14 +67,20 @@
                     </div> <!-- end of col-md-8 col-md-offset-2 -->
                 </div> <!-- end of row -->
 
-
-
-                        <!-- QUIZ SUBMISSION -->
-                        <div class="submitBtn text-center" ng-show="dc.submitQuiz">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="submitQuizDiv text-center" ng-show="dc.submitQuiz">
                             <h3>{{dc.selectedWordCollection}} quiz complete.</h3>
-                            <p>You got <span>{{dc.numCorrect}}</span> out of <span>{{dc.numCorrect + dc.numIncorrect}}</span> words correct.</p>
-                            <button ng-click="dc.submitQuizScore()" class="btn btn-success">Submit Quiz</button>
+                            <h4>You got <span>{{dc.numCorrect}}</span> out of <span>{{dc.numCorrect + dc.numIncorrect}}</span> words correct.</h4>
+                            <button ng-click="dc.submitQuizScore()" class="submitQuizBtn removeFocus">Submit Quiz</button>
                         </div>
+                    </div>
+                </div>
+
+
+
+
+
 
                     </div> <!-- end of col-md-6 col-md-offset-3 -->
                 </div> <!-- end of row -->
