@@ -8,32 +8,31 @@
                 <div class="regHeader">
                   <i class="fa fa-user-plus regIcon" aria-hidden="true"></i>
                   <h2 >Sign up now</h2>
-                  <p>Fill in the form to gain instant access.</p>
                 </div>
 
                   <form class="form-register">
 
-                    <input id="reg-fname" type="text" class="form-control usernameInput regInputStyle" name="fname" value="" placeholder="First Name" ng-model="dc.fnameIn" autocomplete="off" required >
+                    <input id="reg-fname" type="text" class="usernameInput regInputStyle removeFocus" name="fname" value="" placeholder="First Name" ng-model="dc.fnameIn" autocomplete="off" required >
 
-                    <input id="reg-lname" type="text" class="form-control regInputStyle" name="lname" value="" placeholder="Last Name" ng-model="dc.lnameIn" autocomplete="off" required>
+                    <input id="reg-lname" type="text" class="regInputStyle removeFocus" name="lname" value="" placeholder="Last Name" ng-model="dc.lnameIn" autocomplete="off" required>
 
-                    <input id="reg-email" type="email" class="form-control regInputStyle" name="email" value="" placeholder="Email" ng-model="dc.emailIn" autocomplete="off" required>
+                    <input id="reg-email" type="email" class="regInputStyle removeFocus" name="email" value="" placeholder="Email" ng-model="dc.emailIn" autocomplete="off" required>
 
-                    <input id="reg-username" type="text" class="form-control regInputStyle" name="username" value="" placeholder="Username" ng-model="dc.usernameIn" autocomplete="off" required>
+                    <input id="reg-username" type="text" class="regInputStyle removeFocus" name="username" value="" placeholder="Username" ng-model="dc.usernameIn" autocomplete="off" required>
 
-                    <input id="reg-password" type="password" class="form-control regInputStyle" name="password" value="" placeholder="Password" ng-model="dc.passwordIn" autocomplete="off" required>
+                    <input id="reg-password" type="password" class="regInputStyle removeFocus" name="password" value="" placeholder="Password" ng-model="dc.passwordIn" autocomplete="off" required>
 
-                    <input id="reg-passConfirm" type="password" class="form-control regInputStyle" name="passConfirm" value="" placeholder="Confirm Password" ng-model="dc.passwordConfirmIn" autocomplete="off" required>
+                    <input id="reg-passConfirm" type="password" class="regInputStyle removeFocus" name="passConfirm" value="" placeholder="Confirm Password" ng-model="dc.passwordConfirmIn" autocomplete="off" required>
 
-                    <select id="grade" class="form-control regInputStyle" ng-model="dc.gradeIn" required>
-                      <option value="" selected disabled>Select your current grade...</option>
+                    <select id="grade" class="form-control dropdownStyle removeFocus" ng-model="dc.gradeIn" required>
+                      <option class="dropdownSelected" value="" selected disabled>Select your current grade...</option>
                       <option value="Kindergarten">Kindergarten</option>
-                      <option value="1st Grade">First Grade</option>
-                      <option value="2nd Grade">Second Grade</option>
-                      <option value="3rd Grade">Third Grade</option>
-                      <option value="4th Grade">Fourth Grade</option>
-                      <option value="5th Grade">Fifth Grade</option>
-                      <option value="6th Grade">Sixth Grade</option>
+                      <option value="1st Grade">1st Grade</option>
+                      <option value="2nd Grade">2nd Grade</option>
+                      <option value="3rd Grade">3rd Grade</option>
+                      <option value="4th Grade">4th Grade</option>
+                      <option value="5th Grade">5th Grade</option>
+                      <option value="6th Grade">6th Grade</option>
                       <option disabled>──────────</option>
                       <option value="teacher">Teacher</option>
                       <option value="parent">Parent</option>

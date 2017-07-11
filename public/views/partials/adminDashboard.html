@@ -1,4 +1,5 @@
 <div id="wrapper" class="adminDashboardBackgroundImg" ng-init="dc.getLoginInformation()">
+</div>
   <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
           <li><img class="profilePic" src="images/male.jpg" alt="profile pic"></li>
@@ -30,19 +31,19 @@
                 <h1>Word Collections</h1>
 
                   <div class="addCollectionForm">
-                    <input class="input-name" name="tags[]" type="text" placeholder="Add collection name..." ng-model="dc.collectionIn" required/>
+                    <input class="input-name" name="tags[]" type="text" placeholder="Add collection name..." ng-model="dc.collectionIn" autocomplete="off" required/>
                     <select id="grade" class="input-grade" ng-model="dc.adminGradeIn">
                       <option value="" selected disabled>Select a grade level for this collection...</option>
                       <option value="Kindergarten">Kindergarten</option>
-                      <option value="1st Grade">First Grade</option>
-                      <option value="2nd Grade">Second Grade</option>
-                      <option value="3rd Grade">Third Grade</option>
-                      <option value="4th Grade">Fourth Grade</option>
-                      <option value="5th Grade">Fifth Grade</option>
-                      <option value="6th Grade">Sixth Grade</option>
+                      <option value="1st Grade">1st Grade</option>
+                      <option value="2nd Grade">2nd Grade</option>
+                      <option value="3rd Grade">3rd Grade</option>
+                      <option value="4th Grade">4th Grade</option>
+                      <option value="5th Grade">5th Grade</option>
+                      <option value="6th Grade">6th Grade</option>
                     </select>
                     <div class="addCollectionFormButton text-center">
-                      <button ng-click="dc.obtainCollection()">Create Collection</button>
+                      <button class="removeFocus" ng-click="dc.obtainCollection()">CREATE COLLECTION</button>
                     </div>
                   </div>
 
@@ -53,9 +54,9 @@
                     <div class="panel-heading" role="tab" id="headingOne">
                       <span class="deleteBtn pull-right" ng-click="dc.removeCollection(collection._id)">X</span>
                       <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href=".{{collection._id}}" aria-expanded="false" aria-controls="{{collection._id}}">
+                        <a class="collNameColor" role="button" data-toggle="collapse" data-parent="#accordion" href=".{{collection._id}}" aria-expanded="false" aria-controls="{{collection._id}}">
                           {{collection.collName}}
-                          <span class="gradeLevel pull-right">{{collection.gradeLevel}}</span>
+                          <span class="gradeLevel collNameColor pull-right">{{collection.gradeLevel}}</span>
                         </a>
                       </h4>
                     </div>
@@ -99,7 +100,7 @@
 
         <!-- Start of Quiz Results -->
           <div class="row" ng-show="results">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-10 col-md-offset-1">
               <div class="addWordCollectionsDiv">
                 <h1>Quiz Results</h1>
                 <table class="table table-striped resultsTable">
@@ -134,4 +135,4 @@
         </div> <!-- end of container -->
       </div> <!-- end of page-content -->
     </div> <!-- end of page-content-wrapper -->
-</div> <!-- end of wrapper -->
+<!-- end of wrapper -->

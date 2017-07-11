@@ -280,11 +280,17 @@ function DefaultController(DefaultService, $location) {
 
     /*---- REGISTRATION / LOGIN----*/
     vm.registerUser = function() {
+      console.log('My Admin Rights: ', vm.gradeIn);
       if(vm.passwordIn !== vm.passwordConfirmIn) {
         alert('Your passwords don\'t match.');
         vm.passwordIn = '';
         vm.passwordConfirmIn = '';
       } else {
+        if(vm.gradeIn == 'parent' || vm.gradeIn == 'teacher'){
+          vm.adminRights = 1;
+        } else {
+          vm.adminRights = 0;
+        }
         // create object to send to database
         var userObject = {
           fname: vm.fnameIn,
@@ -293,7 +299,7 @@ function DefaultController(DefaultService, $location) {
           username: vm.usernameIn,
           password: vm.passwordIn,
           grade: vm.gradeIn,
-          adminRights: 0
+          adminRights: vm.adminRights
         };
         console.log('userObject:', userObject);
         DefaultService.registerNewUser(userObject).then(function(response){
