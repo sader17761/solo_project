@@ -1,4 +1,5 @@
 <div class="studentDashBackgroundImg" id="wrapper" ng-init="dc.getCollectionNames(); dc.getLoginInformation(); dc.randomQuote();">
+</div>
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li> <!-- student images depending on who's logged in -->
@@ -23,7 +24,7 @@
         <div class="page-content">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-8 col-md-offset-3">
                         <div class="quoteDiv" ng-if="dc.quoteMessage">
                             <h3>{{dc.quote}}</h3>
                             <h4 ng-if="dc.author != ''"><em>- {{dc.author}}</em></h4>
@@ -32,7 +33,7 @@
                 </div> <!-- end of row -->
 
                 <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
+                    <div class="col-md-6 col-md-offset-4">
                         <div class="quizCollectionDiv" ng-if="dc.collectionMessage">
                             <h3>{{dc.selectedWordCollection}}</h3>
                             <h4>{{dc.wordArrayLength}} words</h4>
@@ -42,7 +43,7 @@
                 </div> <!-- end of row -->
 
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-8 col-md-offset-3">
                         <div class="quizSectionDiv" ng-show="dc.quizState">
                             <div class="row">
                                 <div class="col-md-12 text-center">
@@ -91,4 +92,4 @@
             </div> <!-- end of container -->
         </div> <!-- end of page-content -->
     </div> <!-- end of page-content-wrapper -->
-</div> <!-- end of wrapper -->
+<!-- end of wrapper -->

@@ -113,17 +113,6 @@ body {
 
 /*---- login.html partial ----*/
 .loginBackground {
-  // margin-top: 50px;
-  // min-height: 753px;
-  // background: linear-gradient(
-  //     rgba(0, 0, 0, 0.05),
-  //     rgba(0, 0, 0, 0.05)
-  //   ),
-  //   url("../images/background2.png") no-repeat center center fixed;
-  // -webkit-background-size: cover;
-  // -moz-background-size: cover;
-  // -o-background-size: cover;
-  // background-size: cover;
   position: fixed;
   width: 100%;
   min-height: 100%;
@@ -141,7 +130,7 @@ body {
 }
 
 .loginDiv {
-  margin-top: 170px;
+  margin-top: 230px;
 }
 
 .login-wall {
@@ -308,14 +297,13 @@ input.form-control,input.form-control:focus {
 .regHeader i {
   float: left;
   font-size: 40px;
-  margin-left: 40px;
-  margin-right: 10px;
+  margin-left: 70px;
+  margin-right: 20px;
   color: #fff;
 }
 
 .regHeader h2 {
   margin: 0;
-  margin-top: 5px;
   margin-bottom: 30px;
   font-weight: 400;
   color: rgba(#fff, 1);
@@ -327,9 +315,19 @@ input.form-control,input.form-control:focus {
   color: rgba(#fff, 1);
 }
 
+.fieldNote {
+  color: #fff;
+  margin-left: 70px;
+  font-weight: 200;
+}
+
+.fieldNote span {
+  color: red;
+}
+
 .form-register {
     max-width: 330px;
-    padding: 15px;
+    padding: 0 15px 15px 15px;
     margin: 0 auto;
 }
 
@@ -345,7 +343,7 @@ input.form-control,input.form-control:focus {
 }
 
 .form-register select {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .btn-file {
@@ -354,8 +352,13 @@ input.form-control,input.form-control:focus {
 
 .regBtn {
   width: 100%;
-  border-radius: 5px;
-  background: #48efd2;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 25px;
+  color: #fff;
+  background: #48eed1;
+  border: none;
+  box-shadow: 4px 4px 8px rgba(40, 40, 40, 0.65);
   transition: .2s ease-in-out;
 }
 
@@ -683,7 +686,7 @@ input:-webkit-autofill {
 }
 
 .quoteDiv {
-  margin-top: 200px;
+  margin-top: 300px;
 }
 
 .quoteDiv h3 {
@@ -751,7 +754,7 @@ input:-webkit-autofill {
 }
 
 .quizCollectionDiv {
-  margin-top: 200px;
+  margin-top: 350px;
   text-align: center;
   width: 100%;
   min-height: 200px;
@@ -803,7 +806,7 @@ input:-webkit-autofill {
 }
 
 .quizSectionDiv {
-  margin-top: 115px;
+  margin-top: 250px;
   width: 100%;
   height: auto;
   padding: 20px 20px 30px 20px;

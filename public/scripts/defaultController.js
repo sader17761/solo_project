@@ -280,37 +280,40 @@ function DefaultController(DefaultService, $location) {
 
     /*---- REGISTRATION / LOGIN----*/
     vm.registerUser = function() {
-      console.log('My Admin Rights: ', vm.gradeIn);
-      if(vm.passwordIn !== vm.passwordConfirmIn) {
-        alert('Your passwords don\'t match.');
-        vm.passwordIn = '';
-        vm.passwordConfirmIn = '';
+      if(vm.fnameIn === '' || vm.lnameIn === '' || vm.emailIn === '' || vm.usernameIn === '' || vm.passwordIn === '' || vm. passwordConfirmIn === '' || vm.gradeIn === ''){
+        alert('Please fill in all required fields.');
       } else {
-        if(vm.gradeIn == 'parent' || vm.gradeIn == 'teacher'){
-          vm.adminRights = 1;
-        } else {
-          vm.adminRights = 0;
-        }
-        // create object to send to database
-        var userObject = {
-          fname: vm.fnameIn,
-          lname: vm.lnameIn,
-          email: vm.emailIn,
-          username: vm.usernameIn,
-          password: vm.passwordIn,
-          grade: vm.gradeIn,
-          adminRights: vm.adminRights
-        };
-        console.log('userObject:', userObject);
-        DefaultService.registerNewUser(userObject).then(function(response){
-          vm.fnameIn = '';
-          vm.lnameIn = '';
-          vm.emailIn = '';
-          vm.usernameIn = '';
+        if(vm.passwordIn !== vm.passwordConfirmIn) {
+          alert('Your passwords don\'t match.');
           vm.passwordIn = '';
           vm.passwordConfirmIn = '';
-          vm.gradeIn = '';
-        });
+        } else {
+          if(vm.gradeIn == 'parent' || vm.gradeIn == 'teacher'){
+            vm.adminRights = 1;
+          } else {
+            vm.adminRights = 0;
+          }
+          // create object to send to database
+          var userObject = {
+            fname: vm.fnameIn,
+            lname: vm.lnameIn,
+            email: vm.emailIn,
+            username: vm.usernameIn,
+            password: vm.passwordIn,
+            grade: vm.gradeIn,
+            adminRights: vm.adminRights
+          };
+          DefaultService.registerNewUser(userObject).then(function(response){
+            $location.path('/login').replace();
+            vm.fnameIn = '';
+            vm.lnameIn = '';
+            vm.emailIn = '';
+            vm.usernameIn = '';
+            vm.passwordIn = '';
+            vm.passwordConfirmIn = '';
+            vm.gradeIn = '';
+          });
+        }
       }
     };
 

@@ -10,21 +10,25 @@
                   <h2 >Sign up now</h2>
                 </div>
 
-                  <form class="form-register">
+                  <div class="fieldNote">
+                    <p><span>*</span> All fields are required.</p>
+                  </div>
 
-                    <input id="reg-fname" type="text" class="usernameInput regInputStyle removeFocus" name="fname" value="" placeholder="First Name" ng-model="dc.fnameIn" autocomplete="off" required >
+                  <form class="form-register" name="empForm">
 
-                    <input id="reg-lname" type="text" class="regInputStyle removeFocus" name="lname" value="" placeholder="Last Name" ng-model="dc.lnameIn" autocomplete="off" required>
+                    <input id="reg-fname" type="text" ng-value="fname" class="usernameInput regInputStyle removeFocus" name="fname" value="fnameIn" placeholder="First Name" ng-model="dc.fnameIn" autocomplete="off" required >
 
-                    <input id="reg-email" type="email" class="regInputStyle removeFocus" name="email" value="" placeholder="Email" ng-model="dc.emailIn" autocomplete="off" required>
+                    <input id="reg-lname" type="text" ng-value="lname" class="regInputStyle removeFocus" name="lname" value="lnameIn" placeholder="Last Name" ng-model="dc.lnameIn" autocomplete="off" required>
 
-                    <input id="reg-username" type="text" class="regInputStyle removeFocus" name="username" value="" placeholder="Username" ng-model="dc.usernameIn" autocomplete="off" required>
+                    <input id="reg-email" type="email" ng-value="email" class="regInputStyle removeFocus" name="email" value="emailIn" placeholder="Email" ng-model="dc.emailIn" autocomplete="off" required>
 
-                    <input id="reg-password" type="password" class="regInputStyle removeFocus" name="password" value="" placeholder="Password" ng-model="dc.passwordIn" autocomplete="off" required>
+                    <input id="reg-username" type="text" ng-value="username" class="regInputStyle removeFocus" name="username" value="usernameIn" placeholder="Username" ng-model="dc.usernameIn" autocomplete="off" required>
 
-                    <input id="reg-passConfirm" type="password" class="regInputStyle removeFocus" name="passConfirm" value="" placeholder="Confirm Password" ng-model="dc.passwordConfirmIn" autocomplete="off" required>
+                    <input id="reg-password" type="password" ng-value="password" class="regInputStyle removeFocus" name="password" value="passwordIn" placeholder="Password" ng-model="dc.passwordIn" autocomplete="off" required>
 
-                    <select id="grade" class="form-control dropdownStyle removeFocus" ng-model="dc.gradeIn" required>
+                    <input id="reg-passConfirm" type="password" ng-value="passConfirm" class="regInputStyle removeFocus" name="passConfirm" value="passwordConfirmIn" placeholder="Confirm Password" ng-model="dc.passwordConfirmIn" autocomplete="off" required>
+
+                    <select id="grade" class="form-control dropdownStyle removeFocus" ng-value="gradeIn" ng-model="dc.gradeIn" name="gradeDropdown" required>
                       <option class="dropdownSelected" value="" selected disabled>Select your current grade...</option>
                       <option value="Kindergarten">Kindergarten</option>
                       <option value="1st Grade">1st Grade</option>
@@ -41,7 +45,7 @@
                     <!-- * OPTIONAL * upload image file -->
                     <!-- <p><span class="btn btn-file" ng-model="dc.imageIn"><input type="file"/></span></p> -->
 
-                    <a href="#!/login" class="btn btn-lg btn-primary regBtn" type="submit" ng-click="dc.registerUser()">REGISTER</a>
+                    <button type="submit" class="regBtn removeFocus" ng-click="dc.registerUser()" name="registrationButton" ng-disabled="empForm.$invalid" ng-if="!empForm.$invalid">REGISTER</button>
 
                   </form>
                 <a href="#!/login" class="text-center new-account">Back to Login</a>
