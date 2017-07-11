@@ -12,7 +12,9 @@ mongoose.connect('localhost:27017/soloProject'); // soloProject is the DB name
 // schema(s)
 var collectionSchema = new mongoose.Schema({
     date: Date,
-    collName: String
+    collName: String,
+    gradeLevel: String,
+    createdBy: String
 });
 
 

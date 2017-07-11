@@ -1,7 +1,11 @@
 <div class="studentDashBackgroundImg" id="wrapper" ng-init="dc.getCollectionNames(); dc.getLoginInformation(); dc.randomQuote();">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-            <li><img class="profilePic" src="images/drew1.jpg" alt="profile pic"></li>
+            <li> <!-- student images depending on who's logged in -->
+              <img class="profilePic" ng-if="dc.fname == 'Drew'" src="images/drew1.jpg" alt="profile pic">
+              <img class="profilePic" ng-if="dc.fname == 'Levi'" src="images/levi1.jpg" alt="profile pic">
+              <img class="profilePic" ng-if="dc.fname != 'Levi' && dc.fname != 'Drew'" src="images/people.svg" alt="profile pic">
+            </li>
             <li class="sidebar-brand text-center">
                 <h3>{{dc.fname}} {{dc.lname}}</h3>
                 <p>{{dc.grade}}</p>

@@ -127,7 +127,7 @@ function DefaultController(DefaultService, $location) {
 
     // Reads current word
     vm.readSpellingWord = function(){
-      responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1], "US English Female", {volume: 1, rate: 0.9});
+      responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1], "US English Female", {volume: 1, rate: 0.8});
     };
 
     // Reads current word definition
@@ -165,7 +165,9 @@ function DefaultController(DefaultService, $location) {
         // create object to send to database
         var collectionObject = {
           date: todaysDate,
-          collName: vm.collectionIn
+          collName: vm.collectionIn,
+          gradeLevel: vm.adminGradeIn,
+          createdBy: vm.fname + ' ' + vm.lname
         };
         DefaultService.addCollection(collectionObject).then(function(response){
           console.log('Response from Service: ', response);
@@ -185,9 +187,17 @@ function DefaultController(DefaultService, $location) {
         console.log('In Controller getting collection response.', response);
         // clear 'Add word...' input
         vm.collectionIn = '';
-        vm.collectionArray = response.data;
+        vm.adminGradeIn = '';
+        vm.adminCollectionArray = response.data;
+        vm.collectionArray = [];
+        for (var i = 0; i < response.data.length; i++) {
+          if(vm.grade === response.data[i].gradeLevel){
+            vm.collectionArray.push(response.data[i]);
+          }
+        }
         vm.getWordCollection();
         vm.getQuizResults();
+
       });
     };
 
