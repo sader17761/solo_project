@@ -10,15 +10,14 @@
                 <div class="loginHeader">
                     <i class="fa fa-key regIcon" aria-hidden="true"></i>
                     <h2 >Login to our site</h2>
-                    <p>Enter username and password to login.</p>
                 </div>
 
                 <form class="form-signin">
-                  <input id="login-username" type="text" class="form-control usernameInput loginInputStyle" name="username" value="" placeholder="username" ng-model="dc.loginUsernameIn" autocomplete="off" required>
+                  <input id="login-username" type="text" class="loginInputStyle" name="username" value="" placeholder="username" ng-model="dc.loginUsernameIn" autocomplete="off" required>
 
-                  <input id="login-password" type="password" class="form-control usernameInput loginInputStyle" name="password" placeholder="password" ng-model="dc.loginPasswordIn" autocomplete="off" required>
+                  <input id="login-password" type="password" class="loginInputStyle" name="password" placeholder="password" ng-model="dc.loginPasswordIn" autocomplete="off" required>
 
-                  <button class="btn btn-lg btn-primary btn-block loginBtnStyle" type="submit" ng-click="dc.loginUser()">LOGIN</button>
+                  <button class="loginBtnStyle removeFocus" type="submit" ng-click="dc.loginUser()">LOGIN</button>
                 </form>
                 <a href="#!/register" class="text-center new-account">Create an account </a>
               </div>

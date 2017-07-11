@@ -16,6 +16,8 @@
       <link rel="stylesheet" href="vendors/bootstrap.min.css">
       <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
       <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Quicksand:300,400,500" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
       <link rel="stylesheet" href="styles/main.min.css">
 
   </head>
@@ -34,12 +36,12 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav pull-right">
-            <li ng-if="!dc.fname"><a class="btnColor" href="#!/">Home <span class="sr-only">(current)</span></a></li>
+            <li ng-if="!dc.fname"><a class="btnColor" href="#!/">HOME <span class="sr-only">(current)</span></a></li>
             <!-- <li ng-if="dc.rights == 1"><a class="btnColor" href="#!/adminDashboard">Admin Dashboard</a></li> -->
             <!-- <li ng-if="dc.rights == 0"><a class="btnColor" href="#!/studentDashboard">Student Dashboard</a></li>   -->
             <!-- <li><a class="btnColor" href="#!/quiz">Quiz</a></li> -->
-            <li ng-if="!dc.fname"><a class="btnColor" href="#!/login">Login/Register</a></li>
-            <li ng-if="dc.fname"><a class="btnColor" href="#!/" ng-click="dc.logout()">Log Out</a></li>
+            <li ng-if="!dc.fname"><a class="btnColor" href="#!/login">LOGIN / REGISTER</a></li>
+            <li ng-if="dc.fname"><a class="btnColor" href="#!/" ng-click="dc.logout()">LOG OUT</a></li>
           </ul>
         </div> <!-- end of navbar-collapse -->
       </div> <!-- end of container -->
