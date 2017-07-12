@@ -26,14 +26,14 @@
 
         <!-- Start of Word Collections -->
           <div class="row" ng-hide="words">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-3">
               <div class="addWordCollectionsDiv">
                 <h1>Word Collections</h1>
 
                   <div class="addCollectionForm">
                     <input class="input-name" name="tags[]" type="text" placeholder="Add collection name..." ng-model="dc.collectionIn" autocomplete="off" required/>
-                    <select id="grade" class="input-grade" ng-model="dc.adminGradeIn">
-                      <option value="" selected disabled>Select a grade level for this collection...</option>
+                    <select id="grade" class="input-grade" ng-model="dc.adminGradeIn" required>
+                      <option value="" selected disabled>Select a grade level...</option>
                       <option value="Kindergarten">Kindergarten</option>
                       <option value="1st Grade">1st Grade</option>
                       <option value="2nd Grade">2nd Grade</option>
@@ -64,17 +64,17 @@
                       <!-- ng-init="dc.getWordCollection()" -->
 
                       <div class="panel-body">
-                        <div class="input-group">
+
                           <input class="form-control input-add-word" name="tags[]" type="text" placeholder="Add word..." ng-model="dc.wordIn" required/>
-                          <div class="input-group-btn">
-                            <button class="btn btn-success" type="button" data-target="tag-controls" ng-click="dc.obtainWord(collection._id, collection.collName)"><span>+</span></button>
-                          </div>
-                        </div>
+                          <input class="form-control input-add-sentence" name="tags[]" type="text" placeholder="Add sentence..." ng-model="dc.sentenceIn" required/>
+                          <button class="addWordBtn removeFocus" type="button" data-target="tag-controls" ng-click="dc.obtainWord(collection._id, collection.collName)"><span>+</span></button>
+
 
                           <table class="table table-striped wordTable">
                             <thead>
                               <tr>
-                                <th class="spellingWordTitle">Spelling Words</th>
+                                <th class="word">Word</th>
+                                <th class="sentence">Sentence</th>
                                 <th>Play</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -82,8 +82,9 @@
                             </thead>
                             <tbody>
                               <tr ng-repeat="words in dc.wordsArray" ng-if="words.collectionId === collection._id">
-                                <td class="listItem editable" contenteditable="true">{{words.word}}</td>
-                                <td class="play"><i class="fa fa-play play" aria-hidden="true" ng-click="dc.readWord(words.word)"></i></td>
+                                <td class="listItem">{{words.word}}</td>
+                                <td>{{words.sentence}}</td>
+                                <td class="play"><i class="fa fa-play play" aria-hidden="true" ng-click="dc.readWord(words.word, words.sentence)"></i></td>
                                 <td class="edit"><i class="fa fa-pencil pencil" aria-hidden="true"></i></td>
                                 <td class="delete"><i class="fa fa-trash trashcan" aria-hidden="true" ng-click="dc.removeWord(words._id)"></i></td>
                               </tr>
@@ -100,7 +101,7 @@
 
         <!-- Start of Quiz Results -->
           <div class="row" ng-show="results">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-10 col-md-offset-2">
               <div class="addWordCollectionsDiv">
                 <h1>Quiz Results</h1>
                 <table class="table table-striped resultsTable">

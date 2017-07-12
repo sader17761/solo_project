@@ -59,7 +59,8 @@
                             <div class="row">
                                 <div class="col-md-12 apiBtns text-center">
                                     <button ng-click="dc.readSpellingWord()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Word</button>
-                                    <button ng-click="dc.readSpeech()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Part of Speech</button>
+                                    <button ng-click="dc.readSpeech()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Speech</button>
+                                    <button ng-click="dc.readSentence()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Sentence</button>
                                     <button ng-click="dc.readDef()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Definition</button>
                                 </div>
                             </div>
@@ -73,7 +74,7 @@
                 </div> <!-- end of row -->
 
                 <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
+                    <div class="col-md-6 col-md-offset-4">
                         <div class="submitQuizDiv text-center" ng-show="dc.submitQuiz">
                             <h3>{{dc.selectedWordCollection}} quiz complete.</h3>
                             <h4>You got <span>{{dc.numCorrect}}</span> out of <span>{{dc.numCorrect + dc.numIncorrect}}</span> words correct.</h4>
@@ -81,10 +82,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
 
 
                     </div> <!-- end of col-md-6 col-md-offset-3 -->

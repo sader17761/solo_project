@@ -14,6 +14,7 @@ var wordSchema = new mongoose.Schema({
     collectionId: String,
     collectionName: String,
     word: String,
+    sentence: String,
     dateAdded: Date
 });
 

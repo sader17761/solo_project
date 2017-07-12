@@ -35,6 +35,7 @@ function DefaultController(DefaultService, $location) {
 
     /*---- Global Variables ----*/
     vm.spellingWordArray = []; // gets filled when a collection is selected.
+    vm.spellingSentenceArray = [];
     vm.incorrectWordsArray = []; // gets filled when a word is spelled incorrectly.
     vm.quoteMessage = true;
     vm.collectionMessage = false; // turns to true when collection is selected.
@@ -44,6 +45,7 @@ function DefaultController(DefaultService, $location) {
     vm.wordCount = 1; // keeps track of current word in quiz.
     vm.numCorrect = 0; // keeps track of all correct spellings.
     vm.numIncorrect = 0; // keeps track of all incorrect spellings.
+    vm.congrats = ["You're Awesome!", "You're a Rockstar!", "BOOM!", "Brilliant!", "Excellent!", "Fantastic!", "Impressive!", "Mind-Blowing!", "Outstanding!", "Shazam!", "Remarkable!", "Stupendous!", "You're the Bomb!", "You Rock!", "Awesome!"];
 
 
     /*---- TAKE QUIZ ----*/
@@ -68,6 +70,8 @@ function DefaultController(DefaultService, $location) {
         console.log('Response from Service: ', response);
         vm.randomQuote();
         vm.spellingWordArray = [];
+        vm.spellingSentenceArray = [];
+        vm.incorrectWordsArray = [];
         vm.isDisabled = false;
         vm.submitQuiz = false;
         vm.quoteMessage = true;
@@ -96,23 +100,56 @@ function DefaultController(DefaultService, $location) {
     vm.checkSpelling = function(wordToBeChecked){
       var wordToLowerCase = wordToBeChecked.toLowerCase();
 
+      var randomNum = Math.floor(Math.random() * 14) + 0;
+      console.log('Random Number is: ', randomNum);
+
       if(wordToLowerCase === vm.spellingWordArray[vm.wordCount - 1]){
-        iziToast.success({
-            title: '',
-            color: 'green',
-            position: 'center',
-            timeout: 2000,
-            message: 'CORRECT!'
-        });
+        swal({
+          imageUrl: 'images/thumbsup.png',
+          title: vm.congrats[randomNum],
+          width: 830,
+          padding: 20,
+          confirmButtonColor: '#00abc2',
+          timer: 3000
+        }).then(
+          function () {},
+          // handling the promise rejection
+          function (dismiss) {
+            if (dismiss === 'timer') {
+              console.log('I was closed by the timer');
+            }
+          }
+        );
         vm.numCorrect += 1;
       } else {
-        iziToast.success({
-            title: '',
-            color: 'red',
-            position: 'center',
-            timeout: 2000,
-            message: 'Sorry, incorrect.'
-        });
+          responsiveVoice.speak('Sorry, that was incorrect.', "US English Female", {volume: 1, rate: 0.9});
+
+          responsiveVoice.speak( 'The correct way to spell ' + vm.spellingWordArray[vm.wordCount - 1] + ' is ', "US English Female", {volume: 1, rate: 0.9});
+
+          for (var i = 0; i < vm.spellingWordArray[vm.wordCount - 1].length; i++) {
+            responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1][i], "US English Female", {volume: 1, rate: 0.8});
+          }
+
+          var time = (vm.spellingWordArray[vm.wordCount - 1].length * 1000) + 5000;
+          console.log('Time = ', time);
+
+        swal({
+          //imageUrl: 'images/thumbsup.png',
+          title: 'Sorry, that was incorrect.',
+          text:  '- ' + vm.spellingWordArray[vm.wordCount - 1] + ' -',
+          width: 830,
+          padding: 20,
+          confirmButtonColor: '#00abc2',
+          timer: time
+        }).then(
+          function () {},
+          // handling the promise rejection
+          function (dismiss) {
+            if (dismiss === 'timer') {
+              console.log('I was closed by the timer');
+            }
+          }
+        );
         vm.numIncorrect += 1;
         vm.incorrectWordsArray.push(vm.spellingWordArray[vm.wordCount - 1]);
         console.log('List of incorrect words: ', vm.incorrectWordsArray);
@@ -126,12 +163,16 @@ function DefaultController(DefaultService, $location) {
 
 
     // Reads current word
-    vm.readSpellingWord = function(){
+    vm.readSpellingWord = function() {
       responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1], "US English Female", {volume: 1, rate: 0.8});
     };
 
+    vm.readSentence = function() {
+      responsiveVoice.speak(vm.spellingSentenceArray[vm.wordCount - 1], "US English Female", {volume: 1, rate: 0.85});
+    };
+
     // Reads current word definition
-    vm.readDef = function(){
+    vm.readDef = function() {
       DefaultService.getAudio(vm.spellingWordArray[vm.wordCount - 1]).then(function(){
         //console.log('back with:', DefaultService.wordObjects);
         responsiveVoice.speak(DefaultService.wordObjects[0].text, "US English Female", {volume: 1, rate: 0.85});
@@ -139,16 +180,17 @@ function DefaultController(DefaultService, $location) {
     };
 
     // Reads 'part of speech' (noun, verb, adjective, etc...)
-    vm.readSpeech = function(){
+    vm.readSpeech = function() {
       DefaultService.getAudio(vm.spellingWordArray[vm.wordCount - 1]).then(function(){
         responsiveVoice.speak(vm.spellingWordArray[vm.wordCount - 1] + ', is a ' + DefaultService.wordObjects[0].speech, "US English Female", {volume: 1, rate: 0.9});
       });
     };
 
     // Read word in admin. (text to speech)
-    vm.readWord = function(word){
-      console.log('Play button clicked: ', word);
-      responsiveVoice.speak(word, "US English Female", {volume: 1, rate: 0.9});
+    vm.readWord = function(word, sentence) {
+      // console.log('Play button clicked: ', word);
+      responsiveVoice.speak(word, "US English Female", {volume: 1, rate: 0.8});
+      responsiveVoice.speak(sentence, "US English Female", {volume: 1, rate: 0.85});
     };
 
 
@@ -158,7 +200,11 @@ function DefaultController(DefaultService, $location) {
     /*---- COLLECTION NAME ----*/
     vm.obtainCollection = function() {
       if (vm.collectionIn === ''){
-        alert('Please enter a collection name.');
+        //alert('Please enter a collection name.');
+        swal(
+          'Please enter a collection name and select a grade level!',
+          'error'
+        );
       } else {
         //console.log('In controller, sending collection.');
         var todaysDate = new Date();
@@ -218,8 +264,8 @@ function DefaultController(DefaultService, $location) {
 
     /*---- WORD COLLECTION ----*/
     vm.obtainWord = function(collId, collName) {
-      if(vm.wordIn === ''){
-        alert('Please enter a word.');
+      if(vm.wordIn === '' || vm.sentenceIn === ''){
+        alert('Please enter a word and sentence.');
       } else {
         var todaysDate = new Date();
         // create object to send to database
@@ -227,6 +273,7 @@ function DefaultController(DefaultService, $location) {
           collectionId: collId,
           collectionName: collName,
           word: vm.wordIn.toLowerCase(),
+          sentence: vm.sentenceIn.toLowerCase(),
           dateAdded: todaysDate
         };
         console.log('wordObject:', wordObject);
@@ -241,6 +288,7 @@ function DefaultController(DefaultService, $location) {
         //console.log('In Controller getting word response.', response);
         // clear 'Add word...' input
         vm.wordIn = '';
+        vm.sentenceIn = '';
         vm.wordsArray = response.data;
         //console.log('This is what comes back in the words array:', vm.wordsArray);
       });
@@ -262,6 +310,7 @@ function DefaultController(DefaultService, $location) {
         DefaultService.getSelectedWords(id).then(function(response){
           for (var i = 0; i < response.data.length; i++) {
             vm.spellingWordArray.push(response.data[i].word);
+            vm.spellingSentenceArray.push(response.data[i].sentence);
           }
           console.log('Spelling Array:', vm.spellingWordArray);
           vm.selectedWordsArray = response.data;
@@ -402,8 +451,8 @@ function DefaultController(DefaultService, $location) {
           quote: "Happiness doesn't result from what we get, but from what we give.", author: "Ben Carson"
         },
         {
-          quote: "I think I can. I know I can.",
-          author: ""
+          quote: "Anything is possible. Anything can be.",
+          author: "Shel Silverstein"
         },
         {
           quote: "It’s not what happens to you, but how you react to it that matters.",
@@ -466,12 +515,12 @@ function DefaultController(DefaultService, $location) {
           author: "Dr. Suess"
         },
         {
-          quote: "Anything is possible. Anything can be.",
-          author: "Shel Silverstein"
+          quote: "I think I can. I know I can.",
+          author: ""
         },
       ];
 
-      var randomNum = Math.floor(Math.random() * 18) + 0;
+      var randomNum = Math.floor(Math.random() * 17) + 0;
       console.log('Random Number is: ', randomNum);
 
       vm.quote = vm.motivationalQuotes[randomNum].quote;
