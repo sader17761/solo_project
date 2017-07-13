@@ -30,7 +30,8 @@ router.post('/', function(req, res) {
                         username: req.body.username,
                         password: hash,
                         grade: req.body.grade,
-                        adminRights: req.body.adminRights
+                        adminRights: req.body.adminRights,
+                        image: req.body.image
                     };
                     console.log('newUser is:', newUser);
                     users(newUser).save();

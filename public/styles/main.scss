@@ -351,6 +351,7 @@ input.form-control,input.form-control:focus {
 }
 
 .regBtn {
+  display: block;
   width: 100%;
   height: 50px;
   font-size: 18px;
@@ -385,6 +386,40 @@ input.form-control,input.form-control:focus {
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px #05182d inset;
     color: #fff;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px 0 10px 15px;
+    font-size: 18px;
+    color: #7d7b7b;
+    background-color: #05182d;
+    display: inline-block;
+    cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #0a294b;
+}
+
+.inputfile:focus + label {
+	// outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label * {
+	pointer-events: none;
 }
 
 
@@ -466,7 +501,7 @@ input:-webkit-autofill {
   padding-left: 15px;
   margin-right: 1%;
   border-radius: 5px;
-  border: 1px solid gray;
+  border: 1px solid #ccc;
 }
 
 .input-grade {
@@ -475,7 +510,12 @@ input:-webkit-autofill {
   height: 50px;
   width: 35%;
   margin-right: 3%;
-  border: 1px solid gray;
+  border: 1px solid #ccc;
+}
+
+option.disabledDropdown {
+    color: #000;
+    font-weight: bold;
 }
 
 .addCollectionFormButton button{
@@ -502,6 +542,19 @@ input:-webkit-autofill {
   color: #fff;
   background-color: #ab502e;
   box-shadow: 2px 2px 4px rgba(40, 40, 40, 0.65);
+}
+
+.panel-title .collNameColor{
+  color: #767a58;
+  text-decoration: none;
+}
+
+.panel-title .collNameColor:hover{
+  font-weight: bold;
+}
+
+.panel-default>.panel-heading {
+  border-color: #767a58;
 }
 
 .input-add-word {
@@ -646,7 +699,7 @@ input:-webkit-autofill {
   margin-bottom: 60px;
   width: 100%;
   height: auto;
-  padding: 20px 20px 60px 20px;
+  padding: 20px 20px 30px 20px;
   background-color: rgba(#dce2b6, 0.85);
   border-radius: 15px;
   border: 3px solid #e5f2d4;
@@ -659,6 +712,15 @@ input:-webkit-autofill {
   font-size: 52px;
   margin-bottom: 30px;
 }
+
+.reportsDiv p {
+  text-align: center;
+  color: #355055;
+  font-size: 28px;
+  margin-top: 30px;
+}
+
+
 
 
 
@@ -725,8 +787,7 @@ input:-webkit-autofill {
   height: 150px;
   border-radius: 50%;
   margin: 80px 50px 5px 50px;
-  background-color: #fff;
-  box-shadow: 1px 1px 12px #171717;
+  box-shadow: 2px 2px 8px #111010;
 }
 
 .sidebar-brand h3 {

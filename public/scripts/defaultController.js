@@ -1,6 +1,6 @@
 /*-------- CONTROLLER --------*/
 
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', "xeditable"]);
 
 myApp.config(function($routeProvider){
   $routeProvider.when('/', {
@@ -439,7 +439,8 @@ function DefaultController(DefaultService, $location) {
             username: vm.usernameIn,
             password: vm.passwordIn,
             grade: vm.gradeIn,
-            adminRights: vm.adminRights
+            adminRights: vm.adminRights,
+            image: vm.imageIn
           };
           DefaultService.registerNewUser(userObject).then(function(response){
             $location.path('/login').replace();
@@ -450,6 +451,7 @@ function DefaultController(DefaultService, $location) {
             vm.passwordIn = '';
             vm.passwordConfirmIn = '';
             vm.gradeIn = '';
+            vm.imageIn = '';
           });
         }
       }
@@ -630,14 +632,33 @@ function DefaultController(DefaultService, $location) {
 
 
       vm.chartData = function() {
+
+        var obj = { };
+          for (var i = 0; i < vm.allIncorrectWords.length; i++) {
+             obj[vm.allIncorrectWords[i]] = (obj[vm.allIncorrectWords[i]] || 0) + 1;
+          }
+
+        var sorted = [];
+
+        for (var words in obj){
+          sorted.push([words, obj[words]]);
+        }
+
+        sorted.sort(function(a, b) {
+          return a[1] - b[1];
+        });
+
+        var sortedWords = sorted.reverse();
+        console.log(sortedWords);
+
         var ctx = document.getElementById("myChart");
         var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: [sortedWords[0][0], sortedWords[1][0], sortedWords[2][0], sortedWords[3][0], sortedWords[4][0], sortedWords[5][0]],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: '# of misspellings',
+                data: [sortedWords[0][1], sortedWords[1][1], sortedWords[2][1], sortedWords[3][1], sortedWords[4][1], sortedWords[5][1]],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

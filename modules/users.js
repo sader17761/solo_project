@@ -10,7 +10,8 @@ var userSchema = new mongoose.Schema({
     username: String,
     password: String,
     grade: String,
-    adminRights: Number
+    adminRights: Number,
+    image: String
 });
 
 // 'userRegistration' is the name of the collection in the 'soloProject' database

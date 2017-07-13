@@ -2,7 +2,7 @@
 </div>
   <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
-          <li><img class="profilePic" src="images/male.jpg" alt="profile pic"></li>
+          <li><img class="profilePic" src="images/corey.png" alt="profile pic"></li>
           <li class="sidebar-brand text-center adminUsername">
             <h3>{{dc.fname}} {{dc.lname}}</h3>
           </li>
@@ -33,7 +33,7 @@
                   <div class="addCollectionForm">
                     <input class="input-name" name="tags[]" type="text" placeholder="Add collection name..." ng-model="dc.collectionIn" autocomplete="off" required/>
                     <select id="grade" class="input-grade" ng-model="dc.adminGradeIn" required>
-                      <option value="" selected disabled>Select a grade level...</option>
+                      <option value="" class="disabledDropdown" selected disabled="disabled">Select a grade level...</option>
                       <option value="Kindergarten">Kindergarten</option>
                       <option value="1st Grade">1st Grade</option>
                       <option value="2nd Grade">2nd Grade</option>
@@ -140,6 +140,7 @@
                 <div class="reportsDiv">
                   <h1>Report</h1>
                   <canvas id="myChart"></canvas>
+                  <p>Most Frequently Misspelled Words</p>
                 </div> <!-- end of reportsDiv-->
               </div> <!-- end of col-md-7 -->
             </div> <!-- end of row -->
