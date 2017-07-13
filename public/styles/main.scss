@@ -421,7 +421,7 @@ input:-webkit-autofill {
   margin-bottom: 60px;
   width: 100%;
   height: auto;
-  padding: 20px 20px 30px 20px;
+  padding: 20px 60px 30px 60px;
   background-color: rgba(#dce2b6, 0.65);
   border-radius: 15px;
   border: 3px solid #e5f2d4;
@@ -432,6 +432,7 @@ input:-webkit-autofill {
   text-align: center;
   color: #355055;
   font-size: 52px;
+  margin-bottom: 50px;
 }
 
 .resultsTable {
@@ -640,6 +641,25 @@ input:-webkit-autofill {
   margin: 0 auto;
 }
 
+.reportsDiv {
+  margin-top: 80px;
+  margin-bottom: 60px;
+  width: 100%;
+  height: auto;
+  padding: 20px 20px 60px 20px;
+  background-color: rgba(#dce2b6, 0.85);
+  border-radius: 15px;
+  border: 3px solid #e5f2d4;
+  box-shadow: 4px 4px 8px rgba(40, 40, 40, 0.65);
+}
+
+.reportsDiv h1 {
+  text-align: center;
+  color: #355055;
+  font-size: 52px;
+  margin-bottom: 30px;
+}
+
 
 
 
@@ -805,7 +825,7 @@ input:-webkit-autofill {
 
 .quizCollectionDiv h4 {
   display: block;
-  font-size: 38px;
+  font-size: 28px;
   color: #355055;
 }
 
@@ -846,7 +866,7 @@ input:-webkit-autofill {
   margin-top: 250px;
   width: 100%;
   height: auto;
-  padding: 20px 20px 30px 20px;
+  padding: 20px 30px 30px 30px;
   background-color: rgba(#dce2b6, 0.55);
   border-radius: 15px;
   border: 3px solid #e5f2d4;
@@ -860,7 +880,7 @@ input:-webkit-autofill {
 
 .quizSectionDiv h4 {
   color: #355055;
-  font-size: 38px;
+  font-size: 28px;
 }
 
 .quizSectionDiv input {

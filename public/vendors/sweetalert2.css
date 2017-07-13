@@ -36,9 +36,10 @@ body.swal2-iosfix {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   text-align: center;
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-left: 28%;
+  /*margin-top: auto;
+  margin-bottom: auto;*/
+  padding-bottom: 30px;
+  margin: auto;
   overflow-x: hidden;
   overflow-y: auto;
   display: none;
@@ -106,6 +107,7 @@ body.swal2-iosfix {
       -webkit-animation: rotate-loading 1.5s linear 0s infinite normal;
               animation: rotate-loading 1.5s linear 0s infinite normal; }
   .swal2-modal .swal2-styled {
+    font-family: 'Open Sans', sans-serif;
     border: 0;
     border-radius: 25px;
     -webkit-box-shadow: none;
@@ -114,7 +116,7 @@ body.swal2-iosfix {
     cursor: pointer;
     font-size: 17px;
     font-weight: 500;
-    width: 100px;
+    width: 140px;
     margin: 15px 5px 0;
     padding: 10px 32px; }
 
@@ -154,7 +156,7 @@ body.swal2-iosfix {
 
   .swal2-modal .swal2-content {
     font-family: 'Open Sans', sans-serif;
-    letter-spacing: 1.15px;
+    letter-spacing: .5px;
     font-size: 26px;
     text-align: center;
     font-weight: 400;

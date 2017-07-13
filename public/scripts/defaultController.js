@@ -37,6 +37,7 @@ function DefaultController(DefaultService, $location) {
     vm.spellingWordArray = []; // gets filled when a collection is selected.
     vm.spellingSentenceArray = [];
     vm.incorrectWordsArray = []; // gets filled when a word is spelled incorrectly.
+    vm.allIncorrectWords = [];
     vm.quoteMessage = true;
     vm.collectionMessage = false; // turns to true when collection is selected.
     vm.quizState = false; // turns to true when the start quiz button is clicked.
@@ -86,6 +87,12 @@ function DefaultController(DefaultService, $location) {
         //console.log('In Controller getting results response.', response);
         vm.resultsData = response.data;
         console.log('Results response: ', vm.resultsData);
+        for (var i = 0; i < response.data.length; i++) {
+          for (var y = 0; y < response.data[i].wordsIncorrect.length; y++) {
+            vm.allIncorrectWords.push(response.data[i].wordsIncorrect[y]);
+          }
+        }
+        console.log('All incorrect words: ', vm.allIncorrectWords);
       });
     };
 
@@ -133,23 +140,24 @@ function DefaultController(DefaultService, $location) {
           var time = (vm.spellingWordArray[vm.wordCount - 1].length * 1000) + 5000;
           console.log('Time = ', time);
 
-        swal({
-          //imageUrl: 'images/thumbsup.png',
-          title: 'Sorry, that was incorrect.',
-          text:  '- ' + vm.spellingWordArray[vm.wordCount - 1] + ' -',
-          width: 830,
-          padding: 20,
-          confirmButtonColor: '#00abc2',
-          timer: time
-        }).then(
-          function () {},
-          // handling the promise rejection
-          function (dismiss) {
-            if (dismiss === 'timer') {
-              console.log('I was closed by the timer');
+          swal({
+            imageUrl: 'images/error.png',
+            title: 'Sorry, that was incorrect.',
+            text:  '- ' + vm.spellingWordArray[vm.wordCount - 1] + ' -',
+            width: 830,
+            padding: 20,
+            confirmButtonColor: '#b00000',
+            timer: time
+          }).then(
+            function () {},
+            // handling the promise rejection
+            function (dismiss) {
+              if (dismiss === 'timer') {
+                console.log('I was closed by the timer');
+              }
             }
-          }
-        );
+          );
+
         vm.numIncorrect += 1;
         vm.incorrectWordsArray.push(vm.spellingWordArray[vm.wordCount - 1]);
         console.log('List of incorrect words: ', vm.incorrectWordsArray);
@@ -199,12 +207,17 @@ function DefaultController(DefaultService, $location) {
 
     /*---- COLLECTION NAME ----*/
     vm.obtainCollection = function() {
-      if (vm.collectionIn === ''){
-        //alert('Please enter a collection name.');
-        swal(
-          'Please enter a collection name and select a grade level!',
-          'error'
-        );
+      if (vm.collectionIn === '' || vm.adminGradeIn === ''){
+
+        swal({
+          imageUrl: 'images/error.png',
+          title: 'Oops...',
+          text: "Please enter a collection name and select a grade level!",
+          width: 830,
+          padding: 20,
+          confirmButtonColor: '#b00000',
+        });
+
       } else {
         //console.log('In controller, sending collection.');
         var todaysDate = new Date();
@@ -219,7 +232,14 @@ function DefaultController(DefaultService, $location) {
           console.log('Response from Service: ', response);
           if(response.data === 'Exists'){
             vm.collectionIn = '';
-            alert('Sorry, that collection already exists.');
+            swal({
+              imageUrl: 'images/error.png',
+              title: 'Oops...',
+              text: "Sorry, that collection already exists!",
+              width: 830,
+              padding: 20,
+              confirmButtonColor: '#b00000',
+            });
           } else {
             vm.collectionIn = '';
             vm.getCollectionNames(); // this will call the get function and display to DOM
@@ -250,12 +270,31 @@ function DefaultController(DefaultService, $location) {
     vm.removeCollection = function(id) {
       console.log('Inside .removeCollection with collection id: ', id);
 
-      if(confirm('Are you sure you want to delete this collection?')){
+      swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        width: 830,
+        padding: 20,
+        showCancelButton: true,
+        confirmButtonColor: '#00abc2',
+        cancelButtonColor: '#b00000',
+        confirmButtonText: 'Confirm'
+      }).then(function () {
         DefaultService.deleteCollection(id).then(function(response){
-          console.log('Delete collection response is:', response);
-          console.log('Length: ', vm.getCollectionNames());
+          vm.getCollectionNames();
         });
-      }
+          swal({
+            title: 'Deleted!',
+            text: "The collection has been deleted.",
+            type: 'success',
+            width: 830,
+            padding: 20,
+            confirmButtonColor: '#00abc2',
+            timer: 2000
+          });
+      });
+
     };
 
 
@@ -265,7 +304,14 @@ function DefaultController(DefaultService, $location) {
     /*---- WORD COLLECTION ----*/
     vm.obtainWord = function(collId, collName) {
       if(vm.wordIn === '' || vm.sentenceIn === ''){
-        alert('Please enter a word and sentence.');
+        swal({
+          imageUrl: 'images/error.png',
+          title: 'Oops...',
+          text: "Please enter a word and a sentence!",
+          width: 830,
+          padding: 20,
+          confirmButtonColor: '#b00000',
+        });
       } else {
         var todaysDate = new Date();
         // create object to send to database
@@ -295,12 +341,34 @@ function DefaultController(DefaultService, $location) {
     };
 
     vm.removeWord = function(id) {
-      if(confirm('Are you sure you want to delete this word?')){
+      swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        width: 830,
+        padding: 20,
+        showCancelButton: true,
+        confirmButtonColor: '#00abc2',
+        cancelButtonColor: '#b00000',
+        confirmButtonText: 'Confirm'
+      }).then(function () {
         DefaultService.deleteWord(id).then(function(response){
-          console.log('Delete word response is:', response);
           vm.getWordCollection();
         });
-      }
+          swal({
+            title: 'Deleted!',
+            text: "The word has been deleted.",
+            type: 'success',
+            width: 830,
+            padding: 20,
+            confirmButtonColor: '#00abc2',
+            timer: 2000
+          });
+      });
+
+
+
+
     };
 
     // called from the student dashboard...
@@ -320,7 +388,14 @@ function DefaultController(DefaultService, $location) {
           vm.quoteMessage = false;
         });
       } else {
-        alert('Please log in before taking a quiz.');
+        swal({
+          imageUrl: 'images/error.png',
+          title: 'Oops...',
+          text: "Please login before taking a quiz!",
+          width: 830,
+          padding: 20,
+          confirmButtonColor: '#b00000',
+        });
       }
     };
 
@@ -330,10 +405,24 @@ function DefaultController(DefaultService, $location) {
     /*---- REGISTRATION / LOGIN----*/
     vm.registerUser = function() {
       if(vm.fnameIn === '' || vm.lnameIn === '' || vm.emailIn === '' || vm.usernameIn === '' || vm.passwordIn === '' || vm. passwordConfirmIn === '' || vm.gradeIn === ''){
-        alert('Please fill in all required fields.');
+        swal({
+          imageUrl: 'images/error.png',
+          title: 'Oops...',
+          text: "Please fill in all required fields!",
+          width: 830,
+          padding: 20,
+          confirmButtonColor: '#b00000',
+        });
       } else {
         if(vm.passwordIn !== vm.passwordConfirmIn) {
-          alert('Your passwords don\'t match.');
+          swal({
+            imageUrl: 'images/error.png',
+            title: 'Oops...',
+            text: "Passwords don't match!",
+            width: 830,
+            padding: 20,
+            confirmButtonColor: '#b00000',
+          });
           vm.passwordIn = '';
           vm.passwordConfirmIn = '';
         } else {
@@ -381,9 +470,15 @@ function DefaultController(DefaultService, $location) {
                 localStorage.setItem('password', credentials.password);
                 vm.loginUsernameIn = '';
                 vm.loginPasswordIn = '';
-                //alert('It\'s a match...welcome back!');
             } else {
-              alert("Username and Password do not match.  Please try again, or Register.");
+              swal({
+                imageUrl: 'images/error.png',
+                title: 'Oops...',
+                text: "Username and Password do not match. Please try again, or Register.",
+                width: 830,
+                padding: 20,
+                confirmButtonColor: '#b00000',
+              });
               vm.loginUsernameIn = '';
               vm.loginPasswordIn = '';
             }
@@ -432,7 +527,9 @@ function DefaultController(DefaultService, $location) {
       localStorage.setItem('grade', '');
       localStorage.setItem('rights', '');
       vm.spellingWordArray = [];
+      vm.spellingSentenceArray = [];
       vm.incorrectWordsArray = [];
+      vm.allIncorrectWords = [];
       vm.collectionMessage = false;
       vm.quizState = false;
       vm.isDisabled = false;
@@ -527,6 +624,50 @@ function DefaultController(DefaultService, $location) {
       vm.author = vm.motivationalQuotes[randomNum].author;
 
     }; // end of vm.randomQuote function
+
+
+
+
+
+      vm.chartData = function() {
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+};
 
 
 }
