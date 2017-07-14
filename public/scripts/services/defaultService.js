@@ -113,6 +113,14 @@ myApp.service('DefaultService', function($http) {
     });
   };
 
+  sv.editSelection = function(results) {
+    console.log('In service with these results: ', results);
+    return $http.put('/words', results).then(function(response){
+      console.log('Back from updating word to DB with: ', response);
+      return response;
+    });
+  };
+
 
   /*---- REGISTRATION ----*/
   sv.registerNewUser = function(newUser){

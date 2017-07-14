@@ -9,7 +9,7 @@
             </li>
             <li class="sidebar-brand text-center">
                 <h3>{{dc.fname}} {{dc.lname}}</h3>
-                <p>{{dc.grade}}</p>
+                <p>{{dc.gradeFullName}}</p>
             </li>
             <li class="sidebarLinks" ng-repeat="collection in dc.collectionArray">
                 <button class="sidebarBtn" ng-click="dc.getSelectedWords(collection._id)" ng-disabled="dc.isDisabled">
@@ -23,70 +23,70 @@
     <div id="page-content-wrapper">
         <div class="page-content">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-3">
-                        <div class="quoteDiv" ng-if="dc.quoteMessage">
-                            <h3>{{dc.quote}}</h3>
-                            <h4 ng-if="dc.author != ''"><em>- {{dc.author}}</em></h4>
-                        </div> <!-- end of quoteDiv -->
-                    </div> <!-- end of col-md-8 col-md-offset-2 -->
-                </div> <!-- end of row -->
 
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-4">
-                        <div class="quizCollectionDiv" ng-if="dc.collectionMessage">
-                            <h3>{{dc.selectedWordCollection}}</h3>
-                            <h4>{{dc.wordArrayLength}} words</h4>
-                            <button class="btn btn-primary startQuizBtn" ng-click="dc.takeQuiz()">Start Quiz</button>
-                        </div> <!-- end of quizCollectionDiv -->
-                    </div> <!-- end of col-md-6 col-md-offset-3 -->
-                </div> <!-- end of row -->
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="quoteDiv" ng-if="dc.quoteMessage">
+                                <h3>{{dc.quote}}</h3>
+                                <h4 ng-if="dc.author != ''"><em>- {{dc.author}}</em></h4>
+                            </div> <!-- end of quoteDiv -->
+                        </div> <!-- end of col-md-8 col-md-offset-2 -->
+                    </div> <!-- end of row -->
 
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-3">
-                        <div class="quizSectionDiv" ng-show="dc.quizState">
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <h3>{{dc.selectedWordCollection}}</h3>
-                                    <h4>Word <span>{{dc.wordCount}}</span> of <span>{{dc.wordArrayLength}}</span></h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <input class="input-check-word removeFocus" type="text" placeholder="enter your word here" ng-model="dc.checkSpellingIn" required/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 apiBtns text-center">
-                                    <button ng-click="dc.readSpellingWord()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Word</button>
-                                    <button ng-click="dc.readSpeech()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Speech</button>
-                                    <button ng-click="dc.readSentence()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Sentence</button>
-                                    <button ng-click="dc.readDef()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Definition</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-md-offset-3 text-center">
-                                    <button class="checkSpellingBtn removeFocus" type="button" ng-click="dc.checkSpelling(dc.checkSpellingIn)">Check Spelling</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- end of col-md-8 col-md-offset-2 -->
-                </div> <!-- end of row -->
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-4">
+                            <div class="quizCollectionDiv" ng-if="dc.collectionMessage">
+                                <h3>{{dc.selectedWordCollection}}</h3>
+                                <h4>{{dc.wordArrayLength}} words</h4>
+                                <button class="btn btn-primary startQuizBtn" ng-click="dc.takeQuiz()">Start Quiz</button>
+                            </div> <!-- end of quizCollectionDiv -->
+                        </div> <!-- end of col-md-6 col-md-offset-3 -->
+                    </div> <!-- end of row -->
 
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-4">
-                        <div class="submitQuizDiv text-center" ng-show="dc.submitQuiz">
-                            <h3>{{dc.selectedWordCollection}} quiz complete.</h3>
-                            <h4>You got <span>{{dc.numCorrect}}</span> out of <span>{{dc.numCorrect + dc.numIncorrect}}</span> words correct.</h4>
-                            <button ng-click="dc.submitQuizScore()" class="submitQuizBtn removeFocus">Submit Quiz</button>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-3">
+                            <div class="quizSectionDiv" ng-show="dc.quizState">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <h3>{{dc.selectedWordCollection}}</h3>
+                                        <h4>Word <span>{{dc.wordCount}}</span> of <span>{{dc.wordArrayLength}}</span></h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <input class="input-check-word removeFocus" type="text" placeholder="enter your word here" ng-model="dc.checkSpellingIn" required/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 apiBtns text-center">
+                                        <button ng-click="dc.readSpellingWord()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Word</button>
+                                        <button ng-click="dc.readSpeech()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Speech</button>
+                                        <button ng-click="dc.readSentence()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Sentence</button>
+                                        <button ng-click="dc.readDef()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Definition</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-3 text-center">
+                                        <button class="checkSpellingBtn removeFocus" type="button" ng-click="dc.checkSpelling(dc.checkSpellingIn)">Check Spelling</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end of col-md-8 col-md-offset-2 -->
+                    </div> <!-- end of row -->
+
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-4">
+                            <div class="submitQuizDiv text-center" ng-show="dc.submitQuiz">
+                                <h3>{{dc.selectedWordCollection}} quiz complete.</h3>
+                                <h4>You got <span>{{dc.numCorrect}}</span> out of <span>{{dc.numCorrect + dc.numIncorrect}}</span> words correct.</h4>
+                                <button ng-click="dc.submitQuizScore()" class="submitQuizBtn removeFocus">Submit Quiz</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-
-                    </div> <!-- end of col-md-6 col-md-offset-3 -->
-                </div> <!-- end of row -->
-            </div> <!-- end of container -->
-        </div> <!-- end of page-content -->
-    </div> <!-- end of page-content-wrapper -->
+                </div> <!-- end of col-md-6 col-md-offset-3 -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of page-content -->
+</div> <!-- end of page-content-wrapper -->
 <!-- end of wrapper -->

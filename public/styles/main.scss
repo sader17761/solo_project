@@ -397,30 +397,10 @@ input:-webkit-autofill {
 	z-index: -1;
 }
 
-.inputfile + label {
-  width: 100%;
-  border-radius: 5px;
-  padding: 10px 0 10px 15px;
-    font-size: 18px;
-    color: #7d7b7b;
-    background-color: #05182d;
-    display: inline-block;
-    cursor: pointer; /* "hand" cursor */
-}
 
-.inputfile:focus + label,
-.inputfile + label:hover {
-    background-color: #0a294b;
-}
 
-.inputfile:focus + label {
-	// outline: 1px dotted #000;
-	outline: -webkit-focus-ring-color auto 5px;
-}
 
-.inputfile + label * {
-	pointer-events: none;
-}
+
 
 
 
@@ -809,7 +789,7 @@ option.disabledDropdown {
 
 .quoteDiv h3 {
   text-align: center;
-  font-size: 26px;
+  font-size: 30px;
   color: #355055;
   //font-family: 'Quicksand', sans-serif;
   font-family: 'Architects Daughter', cursive;

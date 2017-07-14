@@ -15,6 +15,7 @@ var wordSchema = new mongoose.Schema({
     collectionName: String,
     word: String,
     sentence: String,
+    gradeLevel: String,
     dateAdded: Date
 });
 
@@ -35,6 +36,21 @@ router.get('/', function(req, res) {
     console.log('In word.js, getting from /, req.body is:', req.body);
     wordCollection.find().then(function(response){
         console.log('Collection request:', response);
+        res.send(response);
+    });
+});
+
+router.put('/', function(req, res) {
+    console.log('In word.js, putting from /, req.body is:', req.body);
+    wordCollection.findOneAndUpdate({_id: req.body._id},
+        {$set:
+              {
+                  word: req.body.word,
+                  sentence: req.body.sentence
+              }
+         }
+    ).then(function(response){
+        console.log('Word update request:', response);
         res.send(response);
     });
 });

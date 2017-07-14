@@ -46,7 +46,9 @@ function DefaultController(DefaultService, $location) {
     vm.wordCount = 1; // keeps track of current word in quiz.
     vm.numCorrect = 0; // keeps track of all correct spellings.
     vm.numIncorrect = 0; // keeps track of all incorrect spellings.
+    vm.definitionCount = 0;
     vm.congrats = ["You're Awesome!", "You're a Rockstar!", "BOOM!", "Brilliant!", "Excellent!", "Fantastic!", "Impressive!", "Mind-Blowing!", "Outstanding!", "Shazam!", "Remarkable!", "Stupendous!", "You're the Bomb!", "You Rock!", "Awesome!"];
+    var sound1 = new Audio('sound/app-5.mp3');
 
 
     /*---- TAKE QUIZ ----*/
@@ -79,6 +81,7 @@ function DefaultController(DefaultService, $location) {
         vm.wordCount = 1;
         vm.numCorrect = 0;
         vm.numIncorrect = 0;
+
       }); // end of addQuizResults
     };
 
@@ -111,13 +114,14 @@ function DefaultController(DefaultService, $location) {
       console.log('Random Number is: ', randomNum);
 
       if(wordToLowerCase === vm.spellingWordArray[vm.wordCount - 1]){
+        sound1.play();
         swal({
           imageUrl: 'images/thumbsup.png',
           title: vm.congrats[randomNum],
           width: 830,
           padding: 20,
           confirmButtonColor: '#00abc2',
-          timer: 3000
+          timer: 5000
         }).then(
           function () {},
           // handling the promise rejection
@@ -142,8 +146,8 @@ function DefaultController(DefaultService, $location) {
 
           swal({
             imageUrl: 'images/error.png',
-            title: 'Sorry, that was incorrect.',
-            text:  '- ' + vm.spellingWordArray[vm.wordCount - 1] + ' -',
+            title: '- ' + vm.spellingWordArray[vm.wordCount - 1] + ' -',
+            text:  'Sorry, that was incorrect.',
             width: 830,
             padding: 20,
             confirmButtonColor: '#b00000',
@@ -181,10 +185,11 @@ function DefaultController(DefaultService, $location) {
 
     // Reads current word definition
     vm.readDef = function() {
-      DefaultService.getAudio(vm.spellingWordArray[vm.wordCount - 1]).then(function(){
+      DefaultService.getAudio(vm.spellingWordArray[vm.definitionCount]).then(function(){
         //console.log('back with:', DefaultService.wordObjects);
         responsiveVoice.speak(DefaultService.wordObjects[0].text, "US English Female", {volume: 1, rate: 0.85});
       });
+      vm.definitionCount++;
     };
 
     // Reads 'part of speech' (noun, verb, adjective, etc...)
@@ -365,10 +370,45 @@ function DefaultController(DefaultService, $location) {
             timer: 2000
           });
       });
+    };
 
+    vm.editFields = function(id, word, sentence) {
+      swal.setDefaults({
+        input: 'text',
+        width: 600,
+        padding: 20,
+        confirmButtonText: 'Next &rarr;',
+        showCancelButton: true,
+        animation: false,
+        progressSteps: ['1', '2']
+      });
 
+      var steps = [
+        {
+          title: 'Edit Word',
+        },
+        'Edit Sentence'
+      ];
 
-
+      swal.queue(steps).then(function (result) {
+        console.log('RESULTS: ', result);
+          swal.resetDefaults();
+          swal({
+            title: 'All done!',
+            confirmButtonText: 'Confirm',
+            showCancelButton: false
+          });
+          var editObj = {
+            _id: id,
+            word: result[0],
+            sentence: result[1]
+          };
+          console.log('Edit Object:', editObj);
+          DefaultService.editSelection(editObj).then(function(response){
+            vm.getWordCollection();
+          });
+        }, function () {
+      });
     };
 
     // called from the student dashboard...
@@ -440,7 +480,7 @@ function DefaultController(DefaultService, $location) {
             password: vm.passwordIn,
             grade: vm.gradeIn,
             adminRights: vm.adminRights,
-            image: vm.imageIn
+            image: vm.uploadIn
           };
           DefaultService.registerNewUser(userObject).then(function(response){
             $location.path('/login').replace();
@@ -501,10 +541,9 @@ function DefaultController(DefaultService, $location) {
         localStorage.setItem('rights', response.data[0].adminRights);
         vm.fname = response.data[0].fname; // capturing first name after login
         vm.lname = response.data[0].lname; // capturing last name after login
-        vm.grade = response.data[0].grade; // capturing last name after login
-        vm.rights = response.data[0].adminRights; // capturing last name after login
-      });
-    };
+        vm.rights = response.data[0].adminRights; // capturing adminRights after login
+        });
+      };
 
     vm.getLoginInformation = function(){
       vm.username = localStorage.getItem('username');
@@ -513,6 +552,9 @@ function DefaultController(DefaultService, $location) {
       vm.lname = localStorage.getItem('lastname');
       vm.grade = localStorage.getItem('grade');
       vm.rights = localStorage.getItem('rights');
+      if(localStorage.getItem('grade') === '6') {
+        vm.grade = '6th Grade';
+      }
     };
 
     vm.logout = function() {
@@ -540,6 +582,7 @@ function DefaultController(DefaultService, $location) {
       vm.numCorrect = 0;
       vm.numIncorrect = 0;
     };
+
 
     vm.randomQuote = function(){
       vm.motivationalQuotes = [
@@ -617,9 +660,81 @@ function DefaultController(DefaultService, $location) {
           quote: "I think I can. I know I can.",
           author: ""
         },
+        {
+          quote: "We know what we are but know not what we may be.",
+          author: "Shakespeare"
+        },
+        {
+          quote: "Wheresoever you go, go with all your heart.",
+          author: "Confucious"
+        },
+        {
+          quote: "Don’t cry because it’s over, smile because it happened.",
+          author: "Dr. Seuss"
+        },
+        {
+          quote: "Yesterday is history. Tomorrow is a mystery. Today is a gift. That’s why we call it ‘The Present’.",
+          author: "Eleanor Roosevelt"
+        },
+        {
+          quote: "Fall seven times, stand up eight.",
+          author: "Japanese Proverb"
+        },
+        {
+          quote: "What one can be one must be.",
+          author: "Unknown"
+        },
+        {
+          quote: "Life is a gift.",
+          author: ""
+        },
+        {
+          quote: "Not only must we be good, but we must also be good for something.",
+          author: "Henry David Thoreau"
+        },
+        {
+          quote: "You’ve got to do your own growing, no matter how tall your grandfather was.",
+          author: "Irish Proverb"
+        },
+        {
+          quote: "We make a living by what we get, but we make a life by what we give.",
+          author: "Winston Churchill"
+        },
+        {
+          quote: "Row, row, row your boat. Gently down the stream. Merrily, merrily, merrily, merrily, life is but a dream.",
+          author: "Alice Munro"
+        },
+        {
+          quote: "I am only one, but I am one. I cannot do everything, but I can do something. And I will not let what I cannot do interfere with what I can do.",
+          author: "Edward Everett Hale"
+        },
+        {
+          quote: "Have a heart that never hardens, and a temper that never tires and a touch that never hearts.",
+          author: "Charles Dickens"
+        },
+        {
+          quote: "May you live all the days of your life.",
+          author: "Jonathan Swift"
+        },
+        {
+          quote: "You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose. You’re on your own. And you know what you know. And YOU are the one who’ll decide where to go…",
+          author: "Dr. Seuss"
+        },
+        {
+          quote: "The time is always right to do what is right.",
+          author: "Martin Luther King, Jr."
+        },
+        {
+          quote: "Every action in our lives touches on some chord that will vibrate in eternity.",
+          author: "Edwin Hubbel Chapin"
+        },
+        {
+          quote: "In any moment of decision, the best thing you can do is the right thing. The worst thing you can do is nothing.",
+          authore: "Theordore Roosevelt"
+        },
       ];
 
-      var randomNum = Math.floor(Math.random() * 17) + 0;
+      var randomNum = Math.floor(Math.random() * 36) + 0;
       console.log('Random Number is: ', randomNum);
 
       vm.quote = vm.motivationalQuotes[randomNum].quote;
