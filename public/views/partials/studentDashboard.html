@@ -5,11 +5,11 @@
             <li> <!-- student images depending on who's logged in -->
               <img class="profilePic" ng-if="dc.fname == 'Drew'" src="images/drew1.jpg" alt="profile pic">
               <img class="profilePic" ng-if="dc.fname == 'Levi'" src="images/levi1.jpg" alt="profile pic">
-              <img class="profilePic" ng-if="dc.fname != 'Levi' && dc.fname != 'Drew'" src="images/people.svg" alt="profile pic">
+              <img class="profilePic" ng-if="dc.fname != 'Levi' && dc.fname != 'Drew'" src="images/dev.jpg" alt="profile pic">
             </li>
             <li class="sidebar-brand text-center">
                 <h3>{{dc.fname}} {{dc.lname}}</h3>
-                <p>{{dc.gradeFullName}}</p>
+                <p>{{dc.grade}}</p>
             </li>
             <li class="sidebarLinks" ng-repeat="collection in dc.collectionArray">
                 <button class="sidebarBtn" ng-click="dc.getSelectedWords(collection._id)" ng-disabled="dc.isDisabled">
@@ -60,8 +60,8 @@
                                 <div class="row">
                                     <div class="col-md-12 apiBtns text-center">
                                         <button ng-click="dc.readSpellingWord()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Word</button>
-                                        <button ng-click="dc.readSpeech()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Speech</button>
                                         <button ng-click="dc.readSentence()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Sentence</button>
+                                        <button ng-click="dc.readSpeech()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Speech</button>
                                         <button ng-click="dc.readDef()" class="removeFocus"><i class="fa fa-play" aria-hidden="true"></i> Definition</button>
                                     </div>
                                 </div>

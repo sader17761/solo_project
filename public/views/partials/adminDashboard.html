@@ -3,7 +3,7 @@
   <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
           <li><img class="profilePic" ng-if="dc.fname == 'Corey'" src="images/corey.png" alt="profile pic"></li>
-          <li><img class="profilePic" ng-if="dc.fname == 'Wendy'" src="images/female.jpeg" alt="profile pic"></li>
+          <li><img class="profilePic" ng-if="dc.fname == 'Wendy'" src="images/wendy1.jpg" alt="profile pic"></li>
           <li><img class="profilePic" ng-if="dc.fname != 'Corey' && dc.fname != 'Wendy'" src="images/male.jpg" alt="profile pic"></li>
           <li class="sidebar-brand text-center adminUsername">
             <h3>{{dc.fname}} {{dc.lname}}</h3>
@@ -23,7 +23,7 @@
   </div> <!-- end of sidebar-wrapper -->
 
   <div id="page-content-wrapper" ng-init="dc.getCollectionNames()">
-      <div class="page-content">
+      <div class="page-content" ng-if="dc.rights === '1'">
         <div class="container">
 
         <!-- Start of Word Collections -->
@@ -53,20 +53,26 @@
                     <div class="addCollectionFormButton text-center">
                       <button class="removeFocus" ng-click="dc.obtainCollection()">CREATE COLLECTION</button>
                     </div>
+                    <div class="sortingButtonsDiv">
+                      <a class="sortByCollBtn" href="" ng-click="dc.sort('collection')">Sort by Collection</a>
+                      <a class="sortByGradeBtn" href="" ng-click="dc.sort('grade')">Sort by Grade</a>
+                    </div>
                   </div>
 
 
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-                  <div class="panel panel-default" ng-repeat="collection in dc.adminCollectionArray | orderBy:'collName'">
+                  <div class="panel panel-default" ng-repeat="collection in dc.adminCollectionArray | orderBy:dc.sortCollections">
                     <div class="panel-heading" role="tab" id="headingOne">
-                      <span class="deleteBtn pull-right" ng-click="dc.removeCollection(collection._id)">X</span>
+                      <span class="deleteBtn pull-right" ng-click="dc.removeCollection(collection._id)"><i class="fa fa-trash trashcan" aria-hidden="true"></i></span>
+
                       <h4 class="panel-title">
                         <a class="collNameColor" role="button" data-toggle="collapse" data-parent="#accordion" href=".{{collection._id}}" aria-expanded="false" aria-controls="{{collection._id}}">
                           {{collection.collName}}
                           <span class="gradeLevel collNameColor pull-right">{{collection.gradeLevel}}</span>
                         </a>
                       </h4>
+
                     </div>
                     <div class="panel-collapse collapse {{collection._id}}" role="tabpanel" aria-labelledby="headingOne" >
                       <!-- ng-init="dc.getWordCollection()" -->

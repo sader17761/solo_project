@@ -43,12 +43,22 @@ function DefaultController(DefaultService, $location) {
     vm.quizState = false; // turns to true when the start quiz button is clicked.
     vm.isDisabled = false; // disabled when start quiz button is clicked.
     vm.submitQuiz = false; // will show at the completion of quiz.
+    vm.sortCollections = 'collName';
     vm.wordCount = 1; // keeps track of current word in quiz.
     vm.numCorrect = 0; // keeps track of all correct spellings.
     vm.numIncorrect = 0; // keeps track of all incorrect spellings.
     vm.definitionCount = 0;
     vm.congrats = ["You're Awesome!", "You're a Rockstar!", "BOOM!", "Brilliant!", "Excellent!", "Fantastic!", "Impressive!", "Mind-Blowing!", "Outstanding!", "Shazam!", "Remarkable!", "Stupendous!", "You're the Bomb!", "You Rock!", "Awesome!"];
     var sound1 = new Audio('sound/app-5.mp3');
+
+    vm.sort = function(button){
+      if(button === 'collection'){
+        vm.sortCollections = 'collName';
+      } else {
+        vm.sortCollections = 'gradeLevel';
+      }
+
+    };
 
 
     /*---- TAKE QUIZ ----*/
@@ -108,6 +118,16 @@ function DefaultController(DefaultService, $location) {
     };
 
     vm.checkSpelling = function(wordToBeChecked){
+      if(vm.checkSpellingIn === '' || vm.checkSpellingIn === undefined) {
+        swal({
+          imageUrl: 'images/error.png',
+          title: 'Oops...',
+          text: "You forgot to attempt the word!",
+          width: 600,
+          padding: 20,
+          confirmButtonColor: '#b00000',
+        });
+      } else {
       var wordToLowerCase = wordToBeChecked.toLowerCase();
 
       var randomNum = Math.floor(Math.random() * 14) + 0;
@@ -118,7 +138,7 @@ function DefaultController(DefaultService, $location) {
         swal({
           imageUrl: 'images/thumbsup.png',
           title: vm.congrats[randomNum],
-          width: 830,
+          width: 600,
           padding: 20,
           confirmButtonColor: '#00abc2',
           timer: 5000
@@ -148,7 +168,7 @@ function DefaultController(DefaultService, $location) {
             imageUrl: 'images/error.png',
             title: '- ' + vm.spellingWordArray[vm.wordCount - 1] + ' -',
             text:  'Sorry, that was incorrect.',
-            width: 830,
+            width: 600,
             padding: 20,
             confirmButtonColor: '#b00000',
             timer: time
@@ -169,6 +189,7 @@ function DefaultController(DefaultService, $location) {
       vm.gameComplete(); // after each word, the quiz is checked for completion.
       vm.checkSpellingIn = '';  // input is emptied after spell check.
       vm.wordCount += 1; // adds 1 to word count.
+    }
     }; // end of checkSpelling function
 
 
@@ -185,11 +206,16 @@ function DefaultController(DefaultService, $location) {
 
     // Reads current word definition
     vm.readDef = function() {
-      DefaultService.getAudio(vm.spellingWordArray[vm.definitionCount]).then(function(){
+      DefaultService.getAudio(vm.spellingWordArray[vm.wordCount - 1]).then(function(){
         //console.log('back with:', DefaultService.wordObjects);
-        responsiveVoice.speak(DefaultService.wordObjects[0].text, "US English Female", {volume: 1, rate: 0.85});
+        responsiveVoice.speak(DefaultService.wordObjects[vm.definitionCount].text, "US English Female", {volume: 1, rate: 0.85});
+        if(vm.definitionCount < DefaultService.wordObjects.length) {
+          vm.definitionCount++;
+        } else {
+          vm.definitionCount = 0;
+        }
+        console.log('Definition Count: ', vm.definitionCount);
       });
-      vm.definitionCount++;
     };
 
     // Reads 'part of speech' (noun, verb, adjective, etc...)
@@ -213,7 +239,6 @@ function DefaultController(DefaultService, $location) {
     /*---- COLLECTION NAME ----*/
     vm.obtainCollection = function() {
       if (vm.collectionIn === '' || vm.adminGradeIn === ''){
-
         swal({
           imageUrl: 'images/error.png',
           title: 'Oops...',
@@ -222,7 +247,6 @@ function DefaultController(DefaultService, $location) {
           padding: 20,
           confirmButtonColor: '#b00000',
         });
-
       } else {
         //console.log('In controller, sending collection.');
         var todaysDate = new Date();
@@ -541,6 +565,7 @@ function DefaultController(DefaultService, $location) {
         localStorage.setItem('rights', response.data[0].adminRights);
         vm.fname = response.data[0].fname; // capturing first name after login
         vm.lname = response.data[0].lname; // capturing last name after login
+        vm.grade = response.data[0].grade; // capturing last name after login
         vm.rights = response.data[0].adminRights; // capturing adminRights after login
         });
       };
