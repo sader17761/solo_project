@@ -1,5 +1,5 @@
 <div id="wrapper" class="adminDashboardBackgroundImg" ng-init="dc.getLoginInformation()">
-</div>
+</div> <!-- end of wrapper/adminDashboardBackgroundImg -->
   <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
           <li><img class="profilePic" ng-if="dc.fname == 'Corey'" src="images/corey.png" alt="profile pic"></li>
@@ -59,7 +59,6 @@
                     </div>
                   </div>
 
-
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
                   <div class="panel panel-default" ng-repeat="collection in dc.adminCollectionArray | orderBy:dc.sortCollections">
@@ -82,7 +81,6 @@
                           <input class="form-control input-add-word" name="tags[]" type="text" placeholder="Add word..." ng-model="dc.wordIn" required/>
                           <input class="form-control input-add-sentence" name="tags[]" type="text" placeholder="Add sentence..." ng-model="dc.sentenceIn" required/>
                           <button class="addWordBtn removeFocus" type="button" data-target="tag-controls" ng-click="dc.obtainWord(collection._id, collection.collName, collection.gradeLevel)"><span>+</span></button>
-
 
                           <table class="table table-striped wordTable">
                             <thead>
@@ -161,4 +159,3 @@
         </div> <!-- end of container -->
       </div> <!-- end of page-content -->
     </div> <!-- end of page-content-wrapper -->
-<!-- end of wrapper -->

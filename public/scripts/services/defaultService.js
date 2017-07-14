@@ -49,10 +49,6 @@ myApp.service('DefaultService', function($http) {
 }; // end of getAudio function
 
 
-
-
-
-
   /*---- COLLECTION NAME ----*/
   sv.addCollection = function(collectionToAdd) {
     //console.log("In Service with the collection:", collectionToAdd);
@@ -76,8 +72,6 @@ myApp.service('DefaultService', function($http) {
       return response;
     });
   };
-
-
 
 
   /*---- WORD COLLECTION ----*/
@@ -140,8 +134,5 @@ myApp.service('DefaultService', function($http) {
       return response;
     });
   };
-
-
-
 
 }); // end of myApp.service

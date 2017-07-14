@@ -1,12 +1,9 @@
 /*----------- GLOBAL VARIABLES ----------*/
-
 $primary: #00568e;
 $regColor: #9c9c9c;
 $registrationFont: #bcbfc4;
 
 /*--------- END GLOBAL VARIABLES --------*/
-
-
 h1 {
   color: $primary;
 }
@@ -14,10 +11,6 @@ h1 {
 body {
   font-family: 'Open Sans', sans-serif;
 }
-
-
-
-
 
 /*---- index.html ----*/
 .customNav {
@@ -52,13 +45,7 @@ body {
   border-right: 1px solid #039e8f;
 }
 
-
-
-
-
-
 /*---- home.html partial ----*/
-
 .backgroundImage {
   position: fixed;
   width: 100%;
@@ -105,13 +92,7 @@ body {
   box-shadow: 2px 2px 4px rgba(40, 40, 40, 0.65);
 }
 
-
-
-
-
-
-
-/*---- login.html partial ----*/
+/*------------------------ login.html partial ------------------------*/
 .loginBackground {
   position: fixed;
   width: 100%;
@@ -248,14 +229,7 @@ input.form-control,input.form-control:focus {
   outline: none;
 }
 
-
-
-
-
-
-
-
-/*---- register.html partial ----*/
+/*------------------------ register.html partial ------------------------*/
 .registerBackground {
   position: fixed;
   width: 100%;
@@ -397,25 +371,7 @@ input:-webkit-autofill {
 	z-index: -1;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*---- adminDashboad.html partial ----*/
+/*----------------------- adminDashboad.html partial -----------------------*/
 .adminDashboardBackgroundImg {
   position: fixed;
   width: 100%;
@@ -492,11 +448,6 @@ input:-webkit-autofill {
   margin-right: 3%;
   border: 1px solid #ccc;
 }
-
-// option.disabledDropdown {
-//     color: #000;
-//     font-weight: bold;
-// }
 
 .addCollectionFormButton button{
   display: inline-block;
@@ -771,16 +722,7 @@ input:-webkit-autofill {
   margin-top: 30px;
 }
 
-
-
-
-
-
-
-
-
-
-/*---- StudentDashboad.html partial ----*/
+/*---------------------- StudentDashboad.html partial ----------------------*/
 
 .studentDashboardDiv {
   //margin-top: 80px;
@@ -796,10 +738,6 @@ input:-webkit-autofill {
   -o-background-size: cover;
   background-size: cover;
 }
-
-
-
-/*---- Student Dashboard Sidebar ----*/
 
 #wrapper {
   margin-top: 50px;

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://heroku_slxq9vxw:khsmdc4e3s3n475nqi098l7sth@ds159662.mlab.com:59662/heroku_slxq9vxw'); //localhost:27017/soloProject
+mongoose.connect('mongodb://heroku_1pt5g1s5:gk08nvokdtafa90o5lpjiov7ea@ds157702.mlab.com:57702/heroku_1pt5g1s5'); //localhost:27017/soloProject
+
 
 // schema(s)
 var userSchema = new mongoose.Schema({

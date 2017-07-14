@@ -29,10 +29,6 @@ myApp.controller('DefaultController', DefaultController);
 function DefaultController(DefaultService, $location) {
     var vm = this;
 
-    /*---- IMAGES ----*/
-
-    vm.bodyStyle = {background: "url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/b0e53331516629.565449774c2d4.png)"};
-
     /*---- Global Variables ----*/
     vm.spellingWordArray = []; // gets filled when a collection is selected.
     vm.spellingSentenceArray = [];

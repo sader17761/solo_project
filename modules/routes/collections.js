@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
 
-mongoose.connect('localhost:27017/soloProject'); // soloProject is the DB name
+mongoose.connect('mongodb://heroku_1pt5g1s5:gk08nvokdtafa90o5lpjiov7ea@ds157702.mlab.com:57702/heroku_1pt5g1s5'); // soloProject is the DB name
 
 // schema(s)
 var collectionSchema = new mongoose.Schema({
