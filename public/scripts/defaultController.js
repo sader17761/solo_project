@@ -444,12 +444,12 @@ function DefaultController(DefaultService, $location) {
             vm.spellingWordArray.push(response.data[i].word);
             vm.spellingSentenceArray.push(response.data[i].sentence);
           }
-          console.log('Spelling Array:', vm.spellingWordArray);
           vm.selectedWordsArray = response.data;
           vm.selectedWordCollection = vm.selectedWordsArray[0].collectionName;
           vm.wordArrayLength = vm.selectedWordsArray.length;
           vm.collectionMessage = true;
           vm.quoteMessage = false;
+          console.log('Selected Grade Level:', vm.selectedWordsArray);
         });
       } else {
         swal({
