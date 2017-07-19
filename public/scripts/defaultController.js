@@ -149,7 +149,7 @@ function DefaultController(DefaultService, $location) {
         );
         vm.numCorrect += 1;
       } else {
-          responsiveVoice.speak('Sorry, that was incorrect.', "US English Female", {volume: 1, rate: 0.9});
+          responsiveVoice.speak('Sorry ' + vm.fname + ', that was incorrect.', "US English Female", {volume: 1, rate: 0.9});
 
           responsiveVoice.speak( 'The correct way to spell ' + vm.spellingWordArray[vm.wordCount - 1] + ' is ', "US English Female", {volume: 1, rate: 0.9});
 
