@@ -1,5 +1,4 @@
-![Spellbound Home Page](public/images/SP_home_page.png)
-public/images/SP_home_page.png
+![Spellbound Home Page](SP_home_page.png)
 
 # Spellbound
 
