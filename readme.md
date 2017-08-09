@@ -1,5 +1,4 @@
-![GitHub Logo]()
-![Spellbound Home Page](/images/Screen Shot 2017-08-09 at 2.30.37 PM.png)
+![Spellbound Home Page](/images/SP_home_page.png)
 
 # Spellbound
 
