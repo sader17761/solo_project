@@ -13,6 +13,7 @@ Spellbound is an educational spelling application that frees children up to prac
 * Node.js
 * HTML5
 * CSS
+* SASS
 * JavaScript
 * jquery
 * Bootstrap
@@ -35,12 +36,24 @@ The application also keeps track of their results by logging who took a quiz, wh
 
 1. Start by creating an account.  When selecting your grade level, choose 'Teacher' or 'Parent'.
 2. After creating your account, log in using your new credentials.
-3. You'll then be taken to the your dashboard where you can create collections of words.
-    1. First you'll want to create a unique collection by giving it a name and selecting a grade level.
-    2. Then you'll want to open the collection (by clicking on it's name).
-    3. You can then add as many words and sentences as you wish to each collection.    
+3. You'll then be taken to the your dashboard where you can create collections of words, view the results of quizzes taken, or view a report of the most frequently misspelled words.
+4. To create a collection:
+    1. Give it a name and select a grade level.
+    2. Open the collection by clicking on it's name/grade level.
+    3. You can then add as many words and sentences as needed.
+        - text to speech isn't always that clear, so it's necessary to add a sentence that incorporates the word.
 
-### Admin/Parent/Teacher
+### Student
+
+1. Start by creating an account.  When selecting your grade level, choose the grade your in or will be going into.
+2. After creating your account, log in using your new credentials.
+3. You'll then be taken to the your personal dashboard where you'll see all of the collections related to your grade level.
+4. Select the quiz you wish to take.
+5. Click 'Start Quiz'.
+6. When the quiz starts you'll have the option to listen to the word, sentence, part of speech and definition.
+7. When your ready click into the text input field and attempt to spell the word.  When finished, click the 'Check Spelling' button to see if you are correct.  Whether you're correct or incorrect you'll be taken to the next word.
+8. After completing the quiz, click the 'Submit Quiz' button.
+9. If you wish, you can take the quiz again or select another.
 
 
 
