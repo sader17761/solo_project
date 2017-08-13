@@ -32,7 +32,7 @@ The application also keeps track of their results by logging who took a quiz, wh
 
 ## Instructions
 
-![Spellbound Home Page](SP_admin.png)
+![Spellbound Admin Page](SP_admin.png)
 ### Admin/Parent/Teacher
 
 1. Start by creating an account.  When selecting your grade level, choose 'Teacher' or 'Parent'.
@@ -44,7 +44,7 @@ The application also keeps track of their results by logging who took a quiz, wh
     3. You can then add as many words and sentences as needed.
         - text to speech isn't always that clear, so it's necessary to add a sentence that incorporates the word.
 
-![Spellbound Home Page](SP_quiz.png)
+![Spellbound Quiz Page](SP_quiz.png)
 ### Student
 
 1. Start by creating an account.  When selecting your grade level, choose the grade your in or will be going into.
@@ -68,6 +68,6 @@ This was my first MEAN full-stack application.  Later I plan to add more functio
 
 The version deployed on Heroku (https://spellbound-soloapp.herokuapp.com/#!/) doesn't allow for the 'part of speech', or 'definition' at this time.  Heroku requires a secure https call...the WordNik api I'm using only uses an http call.  I'm looking into setting up this app using another api.  Updates to come.
 
-![Spellbound Home Page](SP_wrong.png)
-![Spellbound Home Page](SP_correct.png)
-![Spellbound Home Page](SP_report.png)
+![Spellbound Wrong Answer](SP_wrong.png)
+![Spellbound Correct Answer](SP_correct.png)
+![Spellbound Report Page](SP_report.png)
